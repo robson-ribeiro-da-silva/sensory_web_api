@@ -12,8 +12,7 @@
 
 			<!-- Menu esquerdo -->
 			<a
-				class="sidebar-brand d-flex align-items-center justify-content-center"
-				href="#">
+				class="sidebar-brand d-flex align-items-center justify-content-center" th:href="@{/}">
 				<div>
 				
 <!-- 					<img width="60px" th:src="@{/img/favicon.png}"> -->
@@ -36,23 +35,46 @@
 			
 			
 			<li class="nav-item"><a class="nav-link collapsed" href="#"
-				data-toggle="collapse" data-target="#collapseatd"
-				aria-expanded="false" aria-controls="collapseatd"> <i
-					class="fas fa-fw fa-users"></i> <span>Menu</span>
+				data-toggle="collapse" data-target="#collapseUsuario"
+				aria-expanded="false" aria-controls="collapseUsuario"> <i
+					class="fas fa-fw fa-users"></i> <span>Usuario</span>
 			</a>
-				<div id="collapseatd" class="collapse" aria-labelledby="headingTwo"
+				<div id="collapseUsuario" class="collapse" aria-labelledby="headingTwo"
 					data-parent="#accordionSidebar">
-					<div class="bg-white py-2 collapse-inner rounded">
-							<!-- <a class="collapse-item" th:href="@{/paciente/add}">Cadastrar Pacientes</a>
-								 <a class="collapse-item" th:href="@{/paciente/listar}">Listar Pacientes</a>   
-							<a class="collapse-item" th:href="@{/boletim/addPaciente}">Acolher paciente</a> 
-							<a class="collapse-item" th:href="@{/boletim/listarStatusAtd}">Acolhimentos realizados</a> --> 
-							<a class="collapse-item" th:href="@{/}">Cadastro de usuario</a> 
-							<a class="collapse-item" th:href="@{/}">Listar</a>
+					<div class="bg-white py-2 collapse-inner rounded"> 
+							<a class="collapse-item" th:href="@{/usuario/add}">Cadastrar Novo</a> 
+							<a class="collapse-item" th:href="@{/usuario/listar}">Listar Todos</a>
 					</div>
 				</div>
 			</li>
 
+			<li class="nav-item"><a class="nav-link collapsed" href="#"
+				data-toggle="collapse" data-target="#collapseAnalise"
+				aria-expanded="false" aria-controls="collapseAnalise"> <i
+					class="fas fa-fw fa-users"></i> <span>Análise Sensorial</span>
+			</a>
+				<div id="collapseAnalise" class="collapse" aria-labelledby="headingTwo"
+					data-parent="#accordionSidebar">
+					<div class="bg-white py-2 collapse-inner rounded"> 
+							<a class="collapse-item" th:href="@{/analisesensorial/add}">Cadastrar Nova</a> 
+							<a class="collapse-item" th:href="@{/analisesensorial/listar}">Minhas Análises</a>
+					</div>
+				</div>
+			</li>
+			
+			<li class="nav-item"><a class="nav-link collapsed" href="#"
+				data-toggle="collapse" data-target="#collapseAvaliador"
+				aria-expanded="false" aria-controls="collapseAvaliador"> <i
+					class="fas fa-fw fa-users"></i> <span>Avaliador</span>
+			</a>
+				<div id="collapseAvaliador" class="collapse" aria-labelledby="headingTwo"
+					data-parent="#accordionSidebar">
+					<div class="bg-white py-2 collapse-inner rounded"> 
+							<a class="collapse-item" th:href="@{/avaliador/add}">Cadastrar Novo</a> 
+							<a class="collapse-item" th:href="@{/avaliador/listar}">Listar Todos</a>
+					</div>
+				</div>
+			</li>
 			
 			<hr class="sidebar-divider">
 			<div class="sidebar-heading">Configurações</div>

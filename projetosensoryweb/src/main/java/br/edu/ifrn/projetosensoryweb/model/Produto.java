@@ -1,10 +1,15 @@
 package br.edu.ifrn.projetosensoryweb.model;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Produto implements Serializable {
@@ -18,6 +23,11 @@ public class Produto implements Serializable {
 	private String nome;
 	
 	private String descricao;
+	
+	private String ingrediente;
+	
+	@ManyToOne
+	private AnaliseSensorial analisesensorial;
 
 	public Long getId() {
 		return id;
@@ -37,6 +47,22 @@ public class Produto implements Serializable {
 
 	public String getDescricao() {
 		return descricao;
+	}
+
+	public String getIngrediente() {
+		return ingrediente;
+	}
+
+	public void setIngrediente(String ingrediente) {
+		this.ingrediente = ingrediente;
+	}
+
+	public AnaliseSensorial getAnalisesensorial() {
+		return analisesensorial;
+	}
+
+	public void setAnalisesensorial(AnaliseSensorial analisesensorial) {
+		this.analisesensorial = analisesensorial;
 	}
 
 	public void setDescricao(String descricao) {

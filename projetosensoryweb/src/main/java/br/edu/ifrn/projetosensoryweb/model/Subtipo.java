@@ -1,10 +1,14 @@
 package br.edu.ifrn.projetosensoryweb.model;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Subtipo implements Serializable {
@@ -18,6 +22,13 @@ public class Subtipo implements Serializable {
 	
 	private String nome;
 
+	@ManyToOne
+	@JoinColumn(name="tipo_id")
+	public Tipo tipo;
+	
+	@OneToMany(mappedBy="subtipo")
+	private List<Escala> escala;
+	
 	public Long getId() {
 		return id;
 	}
@@ -36,6 +47,22 @@ public class Subtipo implements Serializable {
 
 	public static long getSerialversionuid() {
 		return serialVersionUID;
+	}
+
+	public Tipo getTipo() {
+		return tipo;
+	}
+
+	public void setTipo(Tipo tipo) {
+		this.tipo = tipo;
+	}
+
+	public List<Escala> getEscala() {
+		return escala;
+	}
+
+	public void setEscala(List<Escala> escala) {
+		this.escala = escala;
 	}
 	
 	

@@ -11,10 +11,10 @@
 		<div class="content-wrapper" layout:fragment="corpo">
 			<div class="panel panel-default">
 				<div class="panel-heading">
-					<strong>Cadastro de Usuarios</strong>
+					<strong>Cadastro de Avaliadores</strong>
 				</div>
-			<form class="container" method="post" th:object="${usuario}"
-				th:action="@{/usuario/save}">
+			<form class="container" method="post" th:object="${avaliador}"
+				th:action="@{/avaliador/save}">
 
 				<!--Input responsável em guardar o id-->
 				<input id="id" name="id" type="hidden" th:field="*{id}"
@@ -60,6 +60,7 @@
 				</div>
 				
 				
+				
 				<div class="form-group row">
 					<div class="col-sm-4 mb-3 mb-sm-0" name="data"
 						th:classappend="${#fields.hasErrors('dataNascimento')}? 'has-error'">
@@ -70,11 +71,12 @@
 				</div>
 				
 				
-				<div class="form-group row">
-					<div class="col-md-4" th:classappend="${#fields.hasErrors('email')}? 'has-error'">
-						<label>Email</label> 
-						<input type="email" class="form-control input-sm" th:field="*{email}" maxlength="150"/>
-					</div>
+				<label>Fumante</label>
+				 <div class="form-group row">
+					<select th:field="*{fumante}" class="form-control">
+						<option th:value="${false}" >Não</option>
+						<option th:value="${true}" >Sim</option>						
+					</select>
 				</div>
 				
 

@@ -5,6 +5,8 @@ import java.io.Serializable;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Escala implements Serializable {
@@ -17,6 +19,10 @@ public class Escala implements Serializable {
 	private Long id;
 	
 	private String nome;
+	
+	@ManyToOne
+	@JoinColumn(name="subtipo_id")
+	public Subtipo subtipo;
 
 	public Long getId() {
 		return id;
@@ -36,6 +42,14 @@ public class Escala implements Serializable {
 
 	public static long getSerialversionuid() {
 		return serialVersionUID;
+	}
+
+	public Subtipo getSubtipo() {
+		return subtipo;
+	}
+
+	public void setSubtipo(Subtipo subtipo) {
+		this.subtipo = subtipo;
 	}
 	
 	
