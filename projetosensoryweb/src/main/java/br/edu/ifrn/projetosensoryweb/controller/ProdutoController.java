@@ -30,6 +30,8 @@ public class ProdutoController {
 	@GetMapping("/add/{id}")
 	public ModelAndView add(@PathVariable("id") Long id, Produto produto) {
 		
+		produto.setAnalisesensorial(serviceanalise.findOne(id));
+		
 		ModelAndView mv = new ModelAndView("produto/form");
 		mv.addObject("produto", produto);
 		mv.addObject("analisesensorial", serviceanalise.findOne(id));
