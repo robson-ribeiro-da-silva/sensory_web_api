@@ -7,20 +7,20 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 public class IndexController {
 
-	@RequestMapping("/")
-	public String index() {
-		return "index";
-	}
-	
-	@RequestMapping(method=RequestMethod.POST,path= {"/index"})
-	public String login() {
-		return "index";
-	}
-	
-	@RequestMapping(method=RequestMethod.GET,path= {"/entrar"})
-	public String entrar() {
-		return "login";
-	}
-	
+//	@RequestMapping("/")
+//	public String index() {
+//		return "index";
+//	}
+//	
+//	@RequestMapping(method=RequestMethod.POST,path= {"/index"})
+//	public String login() {
+//		return "index";
+//	}
+//	
+//	@RequestMapping(method=RequestMethod.GET,path= {"/entrar"})
+//	public String entrar() {
+//		return "login";
+//	}
+//	
 	
 }
