@@ -3,6 +3,7 @@ package br.edu.ifrn.projetosensoryweb.controller;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import br.edu.ifrn.projetosensoryweb.model.Usuario;
+import br.edu.ifrn.projetosensoryweb.service.RoleService;
 import br.edu.ifrn.projetosensoryweb.service.UsuarioService;
 
 @Controller
@@ -21,12 +23,15 @@ public class UsuarioController {
 	@Autowired
 	private UsuarioService service;
 	
+	@Autowired
+	private RoleService servicerole;
 	
 	@GetMapping("/add")
 	public ModelAndView add(Usuario usuario) {
 		
 		ModelAndView mv = new ModelAndView("usuario/form");
 		mv.addObject("usuario", usuario);
+		mv.addObject("roles", servicerole.buscarTodos());
 		
 		return mv;
 	}
@@ -37,6 +42,9 @@ public class UsuarioController {
 		if(result.hasErrors()) {
 			return add(usuario);
 		}
+		
+		String senha = usuario.getPassword();
+		usuario.setPassword(new BCryptPasswordEncoder().encode(senha));
 		
 		service.save(usuario);
 		

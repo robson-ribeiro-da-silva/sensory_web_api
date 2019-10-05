@@ -77,6 +77,29 @@
 					</div>
 				</div>
 				
+				<div class="form-group row">
+					<div class="col-md-4" th:classappend="${#fields.hasErrors('username')}? 'has-error'">
+						<label>Crie um Username</label> 
+						<input type="text" class="form-control input-sm" th:field="*{username}" maxlength="150"/>
+					</div>
+				</div>
+				
+				<div class="form-group row">
+					<div class="col-md-4" th:classappend="${#fields.hasErrors('password')}? 'has-error'">
+						<label>Crie uma Senha</label> 
+						<input type="password" class="form-control input-sm" th:field="*{password}" maxlength="150"/>
+					</div>
+				</div>
+				
+				<label>Selecione o(s) Papel(is):</label>
+				 <div class="form-group">
+				
+					 <div th:each="role : ${roles}">
+						 <input type="checkbox" th:field="*{role}" th:value="${role.id}"><span th:text="${'  '}"></span><span th:text="${role.nome}"></span><br>
+					 </div>
+				 
+				 </div>
+				
 
 				<div class="form-group row">
 					<button type="submit" class="btn btn-primary">Cadastrar</button>

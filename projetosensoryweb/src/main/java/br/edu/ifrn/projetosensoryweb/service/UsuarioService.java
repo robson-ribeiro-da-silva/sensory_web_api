@@ -1,15 +1,24 @@
 package br.edu.ifrn.projetosensoryweb.service;
 
+import java.util.Collection;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import br.edu.ifrn.projetosensoryweb.model.Role;
 import br.edu.ifrn.projetosensoryweb.model.Usuario;
 import br.edu.ifrn.projetosensoryweb.repository.UsuarioRepository;
 
 @Service
-public class UsuarioService {
+public class UsuarioService implements UserDetailsService {
 	
 	@Autowired
 	private UsuarioRepository repository;
@@ -28,6 +37,34 @@ public class UsuarioService {
 	
 	public void delete(Long id) {
 		repository.deleteById(id);
+	}
+	
+	public Usuario findByUsername(String username){
+		return repository.findByUsername(username);
+	}
+
+	
+	@Override
+	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+		UserDetails user = repository.findByUsername(username);
+		
+		org.springframework.security.core.userdetails.User userFinal = new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), getPermissoes(user));
+		System.out.println(userFinal.getAuthorities());
+		return userFinal;
+		
+	}
+	
+	
+	private Collection<? extends GrantedAuthority> getPermissoes(UserDetails usuario) {
+		Set<SimpleGrantedAuthority> authorities = new HashSet<>();
+			
+		Set<Role> permissoes =  ((Usuario) usuario).getRole();
+		for( Role r : permissoes ) {
+			 authorities.add( new SimpleGrantedAuthority(r.getNome().toUpperCase() ) );
+		}
+		
+		
+		return authorities;
 	}
 
 }
