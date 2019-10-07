@@ -14,7 +14,7 @@
 			<a
 				class="sidebar-brand d-flex align-items-center justify-content-center" th:href="@{/}">
 				<div>
-					<img width="60px" th:src="@{/img/favicon.png}">
+					<img width="60px" th:src="@{/img/ifrn-logo.png}">
 				</div>
 				<div class="sidebar-brand-text mx-3">SENSORY</div>
 			</a>
@@ -24,7 +24,7 @@
 
 			<!-- Nav Item - Dashboard -->
 			<li class="nav-item active"><a class="nav-link">
-				<p align="center"><span class="profile-text">usuario</span></p>
+				<p align="center"><span class="profile-text" sec:authentication="name"></span></p>
 			</a></li>
 
 			<!-- Divider -->
@@ -32,7 +32,7 @@
 
 			<!-- Heading -->
 			
-			
+			<div sec:authorize="hasAuthority('ADM')" >
 			<li class="nav-item"><a class="nav-link collapsed" href="#"
 				data-toggle="collapse" data-target="#collapseUsuario"
 				aria-expanded="false" aria-controls="collapseUsuario"> <i
@@ -46,7 +46,9 @@
 					</div>
 				</div>
 			</li>
+			</div>
 
+			<div sec:authorize="hasAuthority('COR')" >
 			<li class="nav-item"><a class="nav-link collapsed" href="#"
 				data-toggle="collapse" data-target="#collapseAnalise"
 				aria-expanded="false" aria-controls="collapseAnalise"> <i
@@ -60,7 +62,9 @@
 					</div>
 				</div>
 			</li>
+			</div>
 			
+			<div sec:authorize="hasAuthority('ADM')">
 			<li class="nav-item"><a class="nav-link collapsed" href="#"
 				data-toggle="collapse" data-target="#collapseAvaliador"
 				aria-expanded="false" aria-controls="collapseAvaliador"> <i
@@ -74,6 +78,7 @@
 					</div>
 				</div>
 			</li>
+			</div>
 			
 			<hr class="sidebar-divider">
 			<div class="sidebar-heading">Configurações</div>

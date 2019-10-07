@@ -50,6 +50,9 @@ public class Inicializador implements ApplicationListener<ContextRefreshedEvent>
 			Role roleadm = roleService.findByUsername("ADM");
 			admin.getRole().add(roleadm);
 			
+			Role rolecor = roleService.findByUsername("COR");
+			admin.getRole().add(rolecor);
+			
 			userService.save(admin);
 		}
 	}

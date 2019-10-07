@@ -24,7 +24,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
 	protected void configure(HttpSecurity http) throws Exception {
 		http.csrf().disable().authorizeRequests()
 				.antMatchers("/analisesensorial/**").hasAnyAuthority("ADM", "COR")
-				.antMatchers("/avaliador/**").hasAnyAuthority("ADM", "COR")
+				.antMatchers("/avaliador/**").hasAnyAuthority("ADM")
 				.antMatchers("/produto/**").hasAnyAuthority("ADM", "COR")
 				.antMatchers("/").hasAnyAuthority("ADM", "COR")
 				.antMatchers("/usuario/**").hasAnyAuthority("ADM")
