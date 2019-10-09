@@ -13,6 +13,10 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import nz.net.ultraq.thymeleaf.decorators.TitlePatternProcessor;
 
@@ -38,6 +42,7 @@ public class AnaliseSensorial implements Serializable{
 	
 	private String data;
 	
+	@LazyCollection(LazyCollectionOption.TRUE)
 	@OneToMany(mappedBy="analisesensorial")
 	private List<Produto> produtos;
 	

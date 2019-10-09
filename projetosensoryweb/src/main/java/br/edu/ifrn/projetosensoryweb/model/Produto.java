@@ -12,6 +12,8 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 @Entity
 public class Produto implements Serializable {
@@ -29,6 +31,7 @@ public class Produto implements Serializable {
 	
 	private String ingrediente;
 	
+	@LazyCollection(LazyCollectionOption.TRUE)
 	@ManyToOne
 	private AnaliseSensorial analisesensorial;
 
