@@ -22,6 +22,7 @@
 									<th>Sala</th>
 									<th>Alergias</th>
 									<th>Data</th>
+									<th>Qtd Amostras</th>
 									<th>Ações</th>
 								</tr>
 							</thead>
@@ -33,6 +34,7 @@
 									<td th:text="${analisesensorial.sala}"></td>
 									<td th:text="${analisesensorial.alergias}"></td>
 									<td th:text="${analisesensorial.data}"></td>
+									<td th:text="${analisesensorial.qtdAmostras}"></td>
 									<td>
 										<div class="btn-group pull-right">
 											<a class="btn btn-sm btn-info" th:href="@{/analisesensorial/details/{id}(id=${analisesensorial.id})}" >Visualizar</a>

@@ -42,7 +42,11 @@ public class AnaliseSensorial implements Serializable{
 	
 	private String data;
 	
-	@LazyCollection(LazyCollectionOption.TRUE)
+	private int qtdAmostras;
+	
+	private int totalProdutos;
+	
+	
 	@OneToMany(mappedBy="analisesensorial")
 	private List<Produto> produtos;
 	
@@ -96,6 +100,22 @@ public class AnaliseSensorial implements Serializable{
 
 	public void setData(String data) {
 		this.data = data;
+	}
+
+	public int getTotalProdutos() {
+		return totalProdutos;
+	}
+
+	public void setTotalProdutos(int totalProdutos) {
+		this.totalProdutos = totalProdutos;
+	}
+
+	public int getQtdAmostras() {
+		return qtdAmostras;
+	}
+
+	public void setQtdAmostras(int qtdAmostras) {
+		this.qtdAmostras = qtdAmostras;
 	}
 
 	public static long getSerialversionuid() {
