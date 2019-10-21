@@ -11,14 +11,9 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 import org.hibernate.annotations.GenericGenerator;
-import org.hibernate.annotations.LazyCollection;
-import org.hibernate.annotations.LazyCollectionOption;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
-import nz.net.ultraq.thymeleaf.decorators.TitlePatternProcessor;
 
 
 
@@ -49,6 +44,10 @@ public class AnaliseSensorial implements Serializable{
 	
 	@OneToMany(mappedBy="analisesensorial")
 	private List<Produto> produtos;
+	
+	@OneToOne
+	@JoinColumn(name="escala_id")  
+	public Escala escala;
 	
 	@ManyToOne
 	@JoinColumn(name="tipo_id")
@@ -136,6 +135,14 @@ public class AnaliseSensorial implements Serializable{
 
 	public void setTipo(Tipo tipo) {
 		this.tipo = tipo;
+	}
+
+	public Escala getEscala() {
+		return escala;
+	}
+
+	public void setEscala(Escala escala) {
+		this.escala = escala;
 	}
 	
 	

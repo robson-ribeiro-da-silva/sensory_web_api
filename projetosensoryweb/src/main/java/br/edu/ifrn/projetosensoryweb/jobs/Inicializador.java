@@ -5,9 +5,14 @@ import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
+
+import br.edu.ifrn.projetosensoryweb.model.AvaliacaoHedonica;
+import br.edu.ifrn.projetosensoryweb.model.Escala;
 import br.edu.ifrn.projetosensoryweb.model.Role;
 import br.edu.ifrn.projetosensoryweb.model.TipoUsuario;
 import br.edu.ifrn.projetosensoryweb.model.Usuario;
+import br.edu.ifrn.projetosensoryweb.service.AvaliacaoHedonicaService;
+import br.edu.ifrn.projetosensoryweb.service.EscalaService;
 import br.edu.ifrn.projetosensoryweb.service.RoleService;
 import br.edu.ifrn.projetosensoryweb.service.UsuarioService;
 
@@ -20,6 +25,10 @@ public class Inicializador implements ApplicationListener<ContextRefreshedEvent>
 	
 	@Autowired
 	private UsuarioService userService;
+	
+	
+	@Autowired
+	private AvaliacaoHedonicaService serviceavaliacao;
 
 	@Override
 	public void onApplicationEvent(ContextRefreshedEvent event) {
@@ -54,6 +63,32 @@ public class Inicializador implements ApplicationListener<ContextRefreshedEvent>
 			admin.getRole().add(rolecor);
 			
 			userService.save(admin);
+			
+			AvaliacaoHedonica a1 = new AvaliacaoHedonica();
+			a1.setPergunta("COR");
+			
+			serviceavaliacao.save(a1);
+			
+			AvaliacaoHedonica a2 = new AvaliacaoHedonica();
+			a2.setPergunta("SABOR");
+			
+			serviceavaliacao.save(a2);
+			
+			AvaliacaoHedonica a3 = new AvaliacaoHedonica();
+			a3.setPergunta("TEXTURA");
+			
+			serviceavaliacao.save(a3);
+			
+			AvaliacaoHedonica a4 = new AvaliacaoHedonica();
+			a4.setPergunta("APARENCIA");
+			
+			serviceavaliacao.save(a4);
+			
+			AvaliacaoHedonica a5 = new AvaliacaoHedonica();
+			a5.setPergunta("CHEIRO");
+			
+			serviceavaliacao.save(a5);
+
 		}
 	}
 }

@@ -30,5 +30,9 @@ public class AnaliseSensorialService {
 	public void delete(Long id) {
 		repository.deleteById(id);
 	}
+	
+	public AnaliseSensorial findByIdEscala(Long id){
+		return repository.findByIdEscala(id);
+	}
 
 }
