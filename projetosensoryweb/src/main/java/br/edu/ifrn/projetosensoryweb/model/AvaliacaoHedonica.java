@@ -14,6 +14,8 @@ import javax.persistence.OneToMany;
 
 import org.hibernate.annotations.GenericGenerator;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class AvaliacaoHedonica implements Serializable {
 
@@ -26,6 +28,7 @@ public class AvaliacaoHedonica implements Serializable {
 	
 	private String pergunta;
 	
+	@JsonIgnore
 	@ManyToMany(mappedBy="avaliacaohedonica")
 	private List<Escala> escala;
 	

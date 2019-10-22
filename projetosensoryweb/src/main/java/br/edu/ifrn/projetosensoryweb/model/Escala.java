@@ -15,6 +15,8 @@ import javax.persistence.OneToOne;
 
 import org.hibernate.annotations.GenericGenerator;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 
 @Entity
 public class Escala implements Serializable {
@@ -39,6 +41,7 @@ public class Escala implements Serializable {
 	{@JoinColumn(name="avaliacaohedonica_id")})
 	private List<AvaliacaoHedonica> avaliacaohedonica;
 	
+	@JsonIgnore
 	@OneToOne(mappedBy="escala")
 	private AnaliseSensorial analisesensorial;
 	

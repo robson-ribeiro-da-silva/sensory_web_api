@@ -54,11 +54,13 @@ public class AnaliseSensorialController {
 		
 		service.save(analisesensorial);
 		
-		if(analisesensorial.getEscala().getNome().equals("Hedonica")){
+		if(escala.getNome().equals("Hedonica")){
 			escala.setNome("Hedonica");
 			serviceescala.save(escala);
+			//System.out.println("------ > entrou");
 			return addEscalaAvaliacaoHedonica(analisesensorial.getEscala().getId());
 		}else{
+			//System.out.println("------ > não entrou");
 			return findById(analisesensorial.getId());
 		}
 		

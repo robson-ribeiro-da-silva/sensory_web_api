@@ -10,6 +10,8 @@ import javax.persistence.ManyToOne;
 
 import org.hibernate.annotations.GenericGenerator;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class RespostaHedonica implements Serializable{
 
@@ -22,9 +24,14 @@ public class RespostaHedonica implements Serializable{
 	
 	private String resposta;
 	
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name="avaliacaohedonica_id")
 	public AvaliacaoHedonica avaliacaohedonica;
+	
+	@ManyToOne
+	@JoinColumn(name="amostra_id")
+	public Amostra amostra;
 
 	public Long getId() {
 		return id;
@@ -48,6 +55,14 @@ public class RespostaHedonica implements Serializable{
 
 	public void setAvaliacaohedonica(AvaliacaoHedonica avaliacaohedonica) {
 		this.avaliacaohedonica = avaliacaohedonica;
+	}
+
+	public Amostra getAmostra() {
+		return amostra;
+	}
+
+	public void setAmostra(Amostra amostra) {
+		this.amostra = amostra;
 	}
 
 	public static long getSerialversionuid() {
