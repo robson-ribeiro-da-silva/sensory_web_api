@@ -8,4 +8,5 @@ import br.edu.ifrn.projetosensoryweb.model.Escala;
 @Repository
 public interface EscalaRepository extends  JpaRepository<Escala, Long>{
 
+	
 }

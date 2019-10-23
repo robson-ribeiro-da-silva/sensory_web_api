@@ -13,12 +13,15 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import br.edu.ifrn.projetosensoryweb.model.Amostra;
 import br.edu.ifrn.projetosensoryweb.model.AnaliseSensorial;
 import br.edu.ifrn.projetosensoryweb.model.AvaliacaoHedonica;
 import br.edu.ifrn.projetosensoryweb.model.Avaliador;
 import br.edu.ifrn.projetosensoryweb.model.Escala;
 import br.edu.ifrn.projetosensoryweb.model.RespostaHedonica;
+import br.edu.ifrn.projetosensoryweb.service.AmostraService;
 import br.edu.ifrn.projetosensoryweb.service.AnaliseSensorialService;
+import br.edu.ifrn.projetosensoryweb.service.AvaliacaoHedonicaService;
 import br.edu.ifrn.projetosensoryweb.service.RespostaHedonicaService;
 
 @RestController
@@ -30,6 +33,12 @@ public class AnaliseSensorialResource {
 	
 	@Autowired
 	private RespostaHedonicaService serviceresposta;
+	
+	@Autowired
+	private AmostraService serviceamostra;
+	
+	@Autowired
+	private AvaliacaoHedonicaService serviceavaliacao;
 	
 	@GetMapping(value="/findAll")
 	public ResponseEntity<List<AnaliseSensorial>> findAll(){
@@ -46,9 +55,11 @@ public class AnaliseSensorialResource {
 	@GetMapping(value="/findById/{id}")
 	public ResponseEntity<AnaliseSensorial> findById(@PathVariable("id") Long id){
 		
-		AnaliseSensorial analise = service.findOne(id);
+		if(id == null){
+			return ResponseEntity.notFound().build();		
+		}
 		
-		//System.out.println("analise ----->>>  "+analise.getDescricao());
+		AnaliseSensorial analise = service.findByIdAnalise(id);
 		
 		if(analise == null){
 			return ResponseEntity.notFound().build();		
@@ -58,18 +69,30 @@ public class AnaliseSensorialResource {
 	}
 	
 	
-	@PostMapping(value="/addResposta/{cpf}/{idanalise}/{codamostra}/{pergunta}/{resposta}")
+	@GetMapping(value="/addResposta/{cpf}/{idanalise}/{codamostra}/{pergunta}/{resposta}")
 	public ResponseEntity<RespostaHedonica> addResposta(@PathVariable("cpf") String cpf, @PathVariable("idanalise") Long id, 
 			@PathVariable("codamostra") int codigoamostra, @PathVariable("pergunta") String pergunta,
 			@PathVariable("resposta") String resposta){
 		
-		AnaliseSensorial analise = service.findOne(id);
-		Escala escala = analise.getEscala();
-		//AvaliacaoHedonica avaliacaoHedonica = (AvaliacaoHedonica) escala.getAvaliacaohedonica();
-		//RespostaHedonica resposta = avaliacaoHedonica.getRespostahedonica();
+		Amostra amostra = serviceamostra.findByCodigo(codigoamostra);
 		
+		if(amostra == null){
+			return ResponseEntity.notFound().build();		
+		}
+		
+		AvaliacaoHedonica avaliacao = serviceavaliacao.findByIdAnaliseAndPergunta(id, pergunta);
+		
+		if(avaliacao == null){
+			return ResponseEntity.notFound().build();		
+		}
+		RespostaHedonica respostaHedonica = new RespostaHedonica();
+		respostaHedonica.setAmostra(amostra);
+		respostaHedonica.setResposta(resposta);
+		respostaHedonica.setAvaliacaohedonica(avaliacao);
+		
+		serviceresposta.save(respostaHedonica);
 
-		return ResponseEntity.ok(null);
+		return  ResponseEntity.ok(respostaHedonica);
 	}
 
 }

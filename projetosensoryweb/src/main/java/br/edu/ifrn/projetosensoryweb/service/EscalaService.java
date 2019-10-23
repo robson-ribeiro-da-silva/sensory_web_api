@@ -31,5 +31,7 @@ public class EscalaService {
 	public void delete(Long id) {
 		repository.deleteById(id);
 	}
+	
+	
 
 }

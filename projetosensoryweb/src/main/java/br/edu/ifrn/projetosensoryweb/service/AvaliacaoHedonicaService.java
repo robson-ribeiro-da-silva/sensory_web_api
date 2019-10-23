@@ -30,4 +30,9 @@ public class AvaliacaoHedonicaService {
 	public void delete(Long id) {
 		repository.deleteById(id);
 	}
+	
+	public AvaliacaoHedonica findByIdAnaliseAndPergunta(Long id, String pergunta){
+		return repository.findByIdAnaliseAndPergunta(id, pergunta);
+	}
+	
 }

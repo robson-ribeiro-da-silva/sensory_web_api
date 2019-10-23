@@ -30,5 +30,9 @@ public class AmostraService {
 	public void delete(Long id) {
 		repository.deleteById(id);
 	}
+	
+	public Amostra findByCodigo(int codigo){
+		return repository.findByCodigo(codigo);
+	}
 
 }
