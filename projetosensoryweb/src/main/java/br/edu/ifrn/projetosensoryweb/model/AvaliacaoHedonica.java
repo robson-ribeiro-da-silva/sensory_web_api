@@ -11,12 +11,14 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
+@Table(name="AVALIACAO_HEDONICA")
 public class AvaliacaoHedonica implements Serializable {
 
 	private static final long serialVersionUID = 1L;

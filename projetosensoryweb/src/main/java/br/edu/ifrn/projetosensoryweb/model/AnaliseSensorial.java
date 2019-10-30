@@ -10,12 +10,14 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
 
 
 
 @Entity
+@Table(name="ANALISE_SENSORIAL")
 public class AnaliseSensorial implements Serializable{
 
 	private static final long serialVersionUID = 1L;

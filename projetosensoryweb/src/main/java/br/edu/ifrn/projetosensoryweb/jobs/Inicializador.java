@@ -38,13 +38,13 @@ public class Inicializador implements ApplicationListener<ContextRefreshedEvent>
 		
 		if(user == null){
 		
-			/*Role roleA = new Role();
+			Role roleA = new Role();
 			roleA.setNome("ADM");
 			roleService.save(roleA);
 			
 			Role roleC = new Role();
 			roleC.setNome("COR");
-			roleService.save(roleC);*/
+			roleService.save(roleC);
 			
 			Usuario admin = new Usuario();
 			admin.setNome("admin");
