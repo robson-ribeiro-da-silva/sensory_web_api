@@ -35,4 +35,8 @@ public class AvaliacaoHedonicaService {
 		return repository.findByIdAnaliseAndPergunta(id, pergunta);
 	}
 	
+	public AvaliacaoHedonica findByIdAvaliacao(Long id){
+		return repository.findByIdAvaliacao(id);
+	}
+	
 }

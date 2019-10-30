@@ -94,5 +94,21 @@ public class AnaliseSensorialResource {
 
 		return  ResponseEntity.ok(respostaHedonica);
 	}
+	
+	@GetMapping(value="/findByIdAvaliacao/{id}")
+	public ResponseEntity<AvaliacaoHedonica> findByIdAvaliacao(@PathVariable("id") Long id){
+		
+		if(id == null){
+			return ResponseEntity.notFound().build();		
+		}
+		
+		AvaliacaoHedonica avaliacao = serviceavaliacao.findByIdAvaliacao(id);
+		
+		if(avaliacao == null){
+			return ResponseEntity.notFound().build();		
+		}
+
+		return  ResponseEntity.ok(avaliacao);
+	}
 
 }
