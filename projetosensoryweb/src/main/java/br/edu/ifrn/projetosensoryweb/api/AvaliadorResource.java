@@ -28,6 +28,12 @@ public class AvaliadorResource {
 			return ResponseEntity.notFound().build();	
 		}
 		
+		Avaliador avaliador = service.findByCpf(cpf);
+		
+		if(avaliador != null){
+			return ResponseEntity.notFound().build();	
+		}
+		
 		Avaliador a = new Avaliador();
 		
 		a.setNome(nome);

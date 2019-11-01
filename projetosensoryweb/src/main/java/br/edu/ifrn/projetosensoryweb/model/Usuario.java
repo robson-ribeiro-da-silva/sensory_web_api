@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.Collection;
 import java.util.Date;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.Column;
@@ -11,12 +12,15 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 
 
@@ -70,6 +74,10 @@ public class Usuario implements UserDetails {
 	@LazyCollection(LazyCollectionOption.FALSE)
 	@ManyToMany
 	private Set<Role> role = new HashSet<Role>();
+	
+	//@JsonIgnore
+	@OneToMany(mappedBy="usuario")
+	private List<AnaliseSensorial> analisesensorial;
 
 	public Long getId() {
 		return id;
@@ -200,6 +208,18 @@ public class Usuario implements UserDetails {
 	public boolean isEnabled() {
 		// TODO Auto-generated method stub
 		return true;
+	}
+
+	public List<AnaliseSensorial> getAnalisesensorial() {
+		return analisesensorial;
+	}
+
+	public void setAnalisesensorial(List<AnaliseSensorial> analisesensorial) {
+		this.analisesensorial = analisesensorial;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
 	}
 	
 

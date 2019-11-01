@@ -2,73 +2,124 @@
 <html layout:decorate="~{layout}">
 <head>
 <meta charset="UTF-8" />
-<title>Listagem de Analise Sensoriais</title>
+<title>Detalhes da Análise Sensorial</title>
+
+<style type="text/css">
+#caixa2 {
+	border-width: 2px;
+	border-color: black;
+	border-style: solid;
+	border-radius: 30px 10px;
+}
+</style>
 </head>
+
+
+
 <body>
 
-		<div class="content-wrapper" layout:fragment="corpo">
-			<div class="panel panel-default">
-				<div class="panel-heading">
-				<strong>Analise Sensorial</strong>
+	<div class="content-wrapper" layout:fragment="corpo">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<div align="center">
+					<h2>
+						<strong>Análise Sensorial</strong>
+					</h2>
 				</div>
-				<br><br>
-				<div>
-					<hr class="sidebar-divider my-0">				
-					<h6>ID:</h6>
-					<div th:text="${analisesensorial.id}"></div>
-					<hr class="sidebar-divider my-0">
-					<h6>DESCRIÇÃO:</h6>
-					<div th:text="${analisesensorial.descricao}"></div>
-					<hr class="sidebar-divider my-0">
-					<h6>LOCAL:</h6>
-					<div th:text="${analisesensorial.local}"></div>
-					<hr class="sidebar-divider my-0">
-					<h6>SALA:</h6>
-					<div th:text="${analisesensorial.sala}"></div>
-					<hr class="sidebar-divider my-0">
-					<h6>ALERGIAS:</h6>
-					<div th:text="${analisesensorial.alergias}"></div>
-					<hr class="sidebar-divider my-0">
-					<h6>DATA:</h6>
-					<div th:text="${analisesensorial.data}"></div>
-					<hr class="sidebar-divider my-0">
-				</div>
-				<br>
-				<strong>Produtos da Analise</strong>
-				<div class="panel-body">
-					<div class="table-responsive">
-						<table class="table table-sm table-striped table-hover table-bordered">
-							<thead>
-								<tr>
-									
-									<th>Nome</th>
-									<th>Descrição</th>
-									<th>Ingredientes</th>									
-									<th>Ações</th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr th:each="produto : ${analisesensorial.produtos}">
-									<td th:text="${produto.nome}"></td>
-									<td th:text="${produto.descricao}"></td>
-									<td th:text="${produto.ingrediente}"></td>
-									<td>
-										<div class="btn-group pull-right">
-									   		<a class="btn btn-sm btn-primary" th:href="@{/produto/edit/{id}(id=${produto.id})}" >Editar</a>
-									   		<a class="delete btn btn-sm btn-danger" th:href="@{/produto/delete/{id}(id=${produto.id})}">Remover</a>
-									   </div>
-									</td>
-								</tr>
-							</tbody>
-						</table>
+			</div>
+			<br> <br>
+			<div>
+
+				<div id="caixa2">
+					<br>
+					<div class="row">
+						<div class="form-group col-md-6">
+
+							<h6>
+								<b>DESCRIÇÃO:</b>
+							</h6>
+							<div th:text="${analisesensorial.descricao}"></div>
+							<hr class="sidebar-divider my-0">
+							<h6>
+								<b>LOCAL:</b>
+							</h6>
+							<div th:text="${analisesensorial.local}"></div>
+							<hr class="sidebar-divider my-0">
+							<h6>
+								<b>DATA:</b>
+							</h6>
+							<div th:text="${analisesensorial.data}"></div>
+						</div>
+						<div class="form-group col-md-6">
+							<h6>
+								<b>ALERGIAS:</b>
+							</h6>
+							<div th:text="${analisesensorial.alergias}"></div>
+							<hr class="sidebar-divider my-0">
+							<h6>
+								<b>SALA:</b>
+							</h6>
+							<div th:text="${analisesensorial.sala}"></div>
+							<hr class="sidebar-divider my-0">
+
+						</div>
 					</div>
 				</div>
-				<div class="panel-footer">
-					<a class="btn btn-sm btn-success" th:href="@{/produto/add/{id}(id=${analisesensorial.id})}" >Adicionar Produto</a>
-				</div>
-
 			</div>
+			<br>
+			<div align="center">
+				<h3>
+					<strong>Produtos da Análise</strong>
+				</h3>
+			</div>
+			<div align="left">
+				<a class="btn btn-sm btn-primary"
+					th:href="@{/analisesensorial/detailsamostras/{id}(id=${analisesensorial.id})}">Ver
+					Lista de Códigos das Amostras</a>
+			</div>
+			<br>
+			<div class="panel-body">
+				<div class="table-responsive">
+					<table
+						class="table table-sm table-striped table-hover table-bordered">
+						<thead>
+							<tr>
+
+								<th>Nome</th>
+								<th>Descrição</th>
+								<th>Ingredientes</th>
+								<th>Ações</th>
+
+							</tr>
+						</thead>
+						<tbody>
+							<tr th:each="produto : ${analisesensorial.produtos}">
+								<td th:text="${produto.nome}"></td>
+								<td th:text="${produto.descricao}"></td>
+								<td th:text="${produto.ingrediente}"></td>
+								<td>
+									<div align="center">
+										<div class="btn-group pull-right">
+											<a class="btn btn-sm btn-primary"
+												th:href="@{/produto/edit/{id}(id=${produto.id})}">Editar</a>
+											<a class="delete btn btn-sm btn-danger"
+												th:href="@{/produto/delete/{id}(id=${produto.id})}">Remover</a>
+										</div>
+									</div>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+			<div class="panel-footer">
+				<a class="btn btn-sm btn-success"
+					th:href="@{/produto/add/{id}(id=${analisesensorial.id})}">Adicionar
+					Produto</a>
+			</div>
+
 		</div>
-	
+	</div>
+
 </body>
 </html>

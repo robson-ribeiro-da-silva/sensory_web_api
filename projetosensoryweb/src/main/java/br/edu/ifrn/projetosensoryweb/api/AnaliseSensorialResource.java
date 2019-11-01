@@ -22,6 +22,7 @@ import br.edu.ifrn.projetosensoryweb.model.RespostaHedonica;
 import br.edu.ifrn.projetosensoryweb.service.AmostraService;
 import br.edu.ifrn.projetosensoryweb.service.AnaliseSensorialService;
 import br.edu.ifrn.projetosensoryweb.service.AvaliacaoHedonicaService;
+import br.edu.ifrn.projetosensoryweb.service.AvaliadorService;
 import br.edu.ifrn.projetosensoryweb.service.RespostaHedonicaService;
 
 @RestController
@@ -39,6 +40,9 @@ public class AnaliseSensorialResource {
 	
 	@Autowired
 	private AvaliacaoHedonicaService serviceavaliacao;
+	
+	@Autowired
+	private AvaliadorService serviceavaliador;
 	
 	@GetMapping(value="/findAll")
 	public ResponseEntity<List<AnaliseSensorial>> findAll(){
@@ -73,6 +77,16 @@ public class AnaliseSensorialResource {
 	public ResponseEntity<RespostaHedonica> addResposta(@PathVariable("cpf") String cpf, @PathVariable("idanalise") Long id, 
 			@PathVariable("codamostra") int codigoamostra, @PathVariable("pergunta") String pergunta,
 			@PathVariable("resposta") String resposta){
+		/*
+		if(cpf == null || cpf == " "){
+			return ResponseEntity.notFound().build();	
+		}
+		
+		Avaliador avaliador = serviceavaliador.findByCpf(cpf);
+		
+		if(avaliador == null){
+			return ResponseEntity.notFound().build();	
+		}*/
 		
 		Amostra amostra = serviceamostra.findByCodigo(codigoamostra);
 		

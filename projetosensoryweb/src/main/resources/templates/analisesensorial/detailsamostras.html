@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html layout:decorate="~{layout}">
+<head>
+<meta charset="UTF-8" />
+<title>Detalhes dos Produtos</title>
+
+<style type="text/css">
+#caixa2 {
+	border-width: 2px;
+	border-color: black;
+	border-style: solid;
+	border-radius: 30px 10px;
+}
+</style>
+
+</head>
+<body>
+
+	<div class="content-wrapper" layout:fragment="corpo">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<div align="center">
+					<h2>
+						<strong>Análise Sensorial</strong>
+					</h2>
+				</div>
+			</div>
+			<br> <br>
+			<div>
+				<div id="caixa2" align="center">
+					<h6>
+						<b>Descrição da Análise: </b>
+					</h6>
+					<div th:text="${analisesensorial.descricao}"></div>
+				</div>
+			</div>
+			<br>
+
+			<div align="center">
+				<h3>
+					<strong>Produtos da Análise</strong>
+				</h3>
+			</div>
+
+			<div>
+
+
+				<div th:each="produto : ${analisesensorial.produtos}">
+					<br>
+					<div id="caixa2">
+						<br>
+						<div class="row">
+
+							<div class="form-group col-md-6">
+
+								<h8> <b>Nome do Produto:</b></h8>
+								<div th:text="${produto.nome}"></div>
+
+							</div>
+							<div class="form-group col-md-6">
+
+								<h8> <b>Descrição:</b></h8>
+								<div th:text="${produto.descricao}"></div>
+
+							</div>
+
+						</div>
+						<hr class="sidebar-divider my-0">
+						<div align="center">
+							<h5>
+								<strong>Amostras do Produto</strong>
+							</h5>
+						</div>
+						<br>
+						<div class="panel-body">
+							<div class="table-responsive">
+								<table
+									class="table table-sm table-striped table-hover table-bordered">
+									<thead>
+										<tr>
+											<th>Código</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr th:each="amostra : ${produto.amostras}">
+											<td th:text="${amostra.codigo}"></td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<br>
+			<div class="panel-footer">
+				<a class="btn btn-sm btn-info"
+					th:href="@{/analisesensorial/details/{id}(id=${analisesensorial.id})}">Voltar</a>
+			</div>
+
+		</div>
+	</div>
+
+</body>
+</html>

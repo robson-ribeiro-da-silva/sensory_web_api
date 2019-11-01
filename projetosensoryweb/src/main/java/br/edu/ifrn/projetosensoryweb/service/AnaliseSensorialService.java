@@ -40,5 +40,9 @@ public class AnaliseSensorialService {
 	public AnaliseSensorial findByIdEscala(Long id){
 		return repository.findByIdEscala(id);
 	}
+	
+	public List<AnaliseSensorial> findByIdUsuario(Long id){
+		return repository.findByIdUsuario(id);
+	}
 
 }

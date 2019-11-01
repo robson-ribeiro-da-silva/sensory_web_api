@@ -22,9 +22,6 @@ public class Tipo implements Serializable{
 	private Long id;
 	
 	private String nome;
-
-	@OneToMany(mappedBy="tipo")
-	private List<AnaliseSensorial> analisesensorial;
 	
 	@OneToMany(mappedBy="tipo")
 	private List<Subtipo> subtipo;
@@ -50,13 +47,6 @@ public class Tipo implements Serializable{
 		return serialVersionUID;
 	}
 
-	public List<AnaliseSensorial> getAnalisesensorial() {
-		return analisesensorial;
-	}
-
-	public void setAnalisesensorial(List<AnaliseSensorial> analisesensorial) {
-		this.analisesensorial = analisesensorial;
-	}
 
 	public List<Subtipo> getSubtipo() {
 		return subtipo;

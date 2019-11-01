@@ -50,8 +50,8 @@ public class AnaliseSensorial implements Serializable{
 	public Escala escala;
 	
 	@ManyToOne
-	@JoinColumn(name="tipo_id")
-	public Tipo tipo;
+	@JoinColumn(name="usuario_id")
+	public Usuario usuario;
 
 	public Long getId() {
 		return id;
@@ -129,12 +129,12 @@ public class AnaliseSensorial implements Serializable{
 		this.produtos = produtos;
 	}
 
-	public Tipo getTipo() {
-		return tipo;
+	public Usuario getUsuario() {
+		return usuario;
 	}
 
-	public void setTipo(Tipo tipo) {
-		this.tipo = tipo;
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
 	}
 
 	public Escala getEscala() {

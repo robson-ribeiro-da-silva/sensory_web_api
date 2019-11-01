@@ -73,7 +73,7 @@ public class ProdutoController {
 			amostra.setProduto(produto);
 			serviceamostra.save(amostra);
 			
-			System.out.println("Numero "+ i +"° = " +n);
+			//System.out.println("Numero "+ i +"° = " +n);
 		}
 		
 		service.save(produto);
@@ -105,13 +105,13 @@ public class ProdutoController {
 		
 		Produto produto = service.findOne(id);
 		
-		AnaliseSensorial analise = produto.getAnalisesensorial();
-		
-		int totalProdutos = analise.getTotalProdutos();
-		
-		analise.setTotalProdutos(totalProdutos-1);
-		
-		serviceanalise.save(analise);
+//		AnaliseSensorial analise = produto.getAnalisesensorial();
+//		
+//		int totalProdutos = analise.getTotalProdutos();
+//		
+//		analise.setTotalProdutos(totalProdutos-1);
+//		
+//		serviceanalise.save(analise);
 		
 		return editadd(produto.getAnalisesensorial().getId(), produto);
 	}
