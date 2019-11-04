@@ -114,6 +114,15 @@ public class AnaliseSensorialController {
 		return mv;
 	}
 	
+	@GetMapping("/respostasanalise/{id}")
+	public ModelAndView findByRespostasAnalise(@PathVariable("id") Long id) {
+		
+		ModelAndView mv = new ModelAndView("analisesensorial/respostas");
+		mv.addObject("analisesensorial", service.findOne(id));
+		
+		return mv;
+	}
+	
 	@GetMapping("/edit/{id}")
 	public ModelAndView edit(@PathVariable("id") Long id) {
 		

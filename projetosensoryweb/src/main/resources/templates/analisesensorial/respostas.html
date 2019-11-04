@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html layout:decorate="~{layout}">
+<head>
+<meta charset="UTF-8" />
+<title>Detalhes dos Produtos</title>
+
+<style type="text/css">
+#caixa2 {
+	border-width: 2px;
+	border-color: black;
+	border-style: solid;
+	border-radius: 30px 10px;
+}
+</style>
+
+</head>
+<body>
+
+	<div class="content-wrapper" layout:fragment="corpo">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<div align="center">
+					<h2>
+						<strong>Análise Sensorial</strong>
+					</h2>
+				</div>
+			</div>
+			<br> <br>
+			<div>
+				<div id="caixa2" align="center">
+					<h6>
+						<b>Descrição da Análise: </b>
+					</h6>
+					<div th:text="${analisesensorial.descricao}"></div>
+				</div>
+			</div>
+			<br>
+
+			<div align="center">
+				<h3>
+					<strong>Produtos da Análise</strong>
+				</h3>
+			</div>
+
+			<div>
+
+
+				<div th:each="produto : ${analisesensorial.produtos}">
+					<br>
+					<div id="caixa2">
+						<br>
+						<div class="row">
+
+							<div class="form-group col-md-6">
+
+								<h8> <b>Nome do Produto:</b></h8>
+								<div th:text="${produto.nome}"></div>
+
+							</div>
+							<div class="form-group col-md-6">
+
+								<h8> <b>Descrição:</b></h8>
+								<div th:text="${produto.descricao}"></div>
+
+							</div>
+
+						</div>
+						<hr class="sidebar-divider my-0">
+						<div align="center">
+							<h5>
+								<strong>Amostras do Produto</strong>
+							</h5>
+						</div>
+						
+						
+						<br>
+						<div class="panel-body">
+							<div class="table-responsive">
+								<table
+									class="table table-sm table-striped table-hover table-bordered">
+									<thead >
+										<tr>
+										<th>Código</th>
+										<th th:each="avaliacao : ${analisesensorial.escala.avaliacaohedonica}" th:text="${avaliacao.pergunta}"></th>
+										</tr>
+									</thead>
+									<tbody>
+										
+<!-- 										<tr> -->
+<!-- 											<td th:text="${amostra.codigo}"></td> -->
+<!-- 										</tr> -->
+										
+										<tr th:each="amostra : ${produto.amostras}">
+										<td th:text="${amostra.codigo}"></td>
+											<td th:each="resposta : ${amostra.respostahedonica}" th:text="${resposta.resposta}"></td>
+										</tr>
+										
+									</tbody>
+								</table>
+							</div>
+						
+<!-- 						<br> -->
+<!-- 						<div class="panel-body"> -->
+<!-- 							<div class="table-responsive"> -->
+<!-- 								<div> -->
+<!-- 									<div class="row"> -->
+<!-- 										<div align="center" class="form-group col-md-2"> -->
+<!-- 											<h6> -->
+<!-- 												<strong>Código</strong> -->
+<!-- 											</h6> -->
+<!-- 										</div> -->
+<!-- 										<div -->
+<!-- 											th:each="avaliacao : ${analisesensorial.escala.avaliacaohedonica}"> -->
+<!-- 											<div align="right"> -->
+<!-- 												<div class="form-group col-md-2"> -->
+<!-- 													<div th:text="${avaliacao.pergunta}"></div> -->
+<!-- 												</div> -->
+<!-- 											</div> -->
+<!-- 										</div> -->
+<!-- 									</div> -->
+<!-- 								</div> -->
+<!-- 							</div> -->
+<!-- 						</div> -->
+<!-- 						<div class="panel-body"> -->
+<!-- 							<div class="table-responsive"> -->
+<!-- 									<div th:each="amostra : ${produto.amostras}"> -->
+<!-- 										<div class="row"> -->
+<!-- 											<div align="center" class="form-group col-md-2"> -->
+<!-- 												<div th:text="${amostra.codigo}"></div> -->
+<!-- 											</div> -->
+<!-- 											<div th:each="resposta : ${amostra.respostahedonica}"> -->
+<!-- 											<div align="center"> -->
+<!-- 												<div class="form-group col-md-6"> -->
+<!-- 													<div th:text="${resposta.resposta}"></div> -->
+<!-- 												</div> -->
+<!-- 											</div> -->
+<!-- 											</div> -->
+<!-- 									</div> -->
+<!-- 								</div> -->
+								<!-- 								<table -->
+								<!-- 									class="table table-sm table-striped table-hover table-bordered"> -->
+								<!-- 									<thead> -->
+								<!-- 										<tr > -->
+								<!-- 											<th>Código</th> -->
+								<!-- 											<div th:each="amostra1 : ${produto.amostras}"> -->
+								<!-- 											<div th:each="resposta : ${amostra1.respostahedonica}"></div> -->
+								<!-- 											<th >zxv</th> -->
+								<!-- 											</div> -->
+								<!-- 										</tr> -->
+								<!-- 									</thead> -->
+								<!-- 									<tbody> -->
+								<!-- 										<tr th:each="amostra : ${produto.amostras}"> -->
+								<!-- 											<td th:text="${amostra.codigo}"></td> -->
+								<!-- 											<div th:each="resposta : ${amostra.respostahedonica}"> -->
+								<!-- 											<div th:text="${resposta.resposta}"></div> -->
+								<!-- 											<div th:text="${resposta.avaliacaohedonica.pergunta}"></div> -->
+								<!-- 											</div> -->
+								<!-- 										</tr> -->
+								<!-- 									</tbody> -->
+								<!-- 								</table> -->
+							</div>
+							
+					</div>
+				</div>
+			</div>
+			<br>
+			<div class="panel-footer">
+				<a class="btn btn-sm btn-info"
+					th:href="@{/analisesensorial/listar}">Voltar</a>
+			</div>
+
+		</div>
+	</div>
+
+</body>
+</html>

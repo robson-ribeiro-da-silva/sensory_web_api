@@ -14,6 +14,8 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 
 
 @Entity
@@ -49,6 +51,7 @@ public class AnaliseSensorial implements Serializable{
 	@JoinColumn(name="escala_id")  
 	public Escala escala;
 	
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name="usuario_id")
 	public Usuario usuario;
