@@ -4,15 +4,46 @@
 <meta charset="UTF-8" />
 <title>Cadastro de Usuario</title>
 
+<script type="text/javascript">
+	function fMasc(objeto, mascara) {
+		obj = objeto
+		masc = mascara
+		setTimeout("fMascEx()", 1)
+	}
+	function fMascEx() {
+		obj.value = masc(obj.value)
+	}
+
+	function mCPF(cpf) {
+		cpf = cpf.replace(/\D/g, "")
+		cpf = cpf.replace(/(\d{3})(\d)/, "$1.$2")
+		cpf = cpf.replace(/(\d{3})(\d)/, "$1.$2")
+		cpf = cpf.replace(/(\d{3})(\d{1,2})$/, "$1-$2")
+		return cpf
+	}
+</script>
+
+<script type="text/javascript">
+	function validaSenha(input) {
+		if (input.value != document.getElementById('txtSenha').value) {
+			input.setCustomValidity('Repita a senha corretamente');
+		} else {
+			input.setCustomValidity('');
+		}
+	}
+</script>
+
 </head>
 
 </head>
 <body>
-		<div class="content-wrapper" layout:fragment="corpo">
-			<div class="panel panel-default">
-				<div class="panel-heading">
+	<div class="content-wrapper" layout:fragment="corpo">
+		<div class="panel panel-default">
+			<div align="center" class="panel-heading">
+				<h5>
 					<strong>Cadastro de Avaliadores</strong>
-				</div>
+				</h5>
+			</div>
 			<form class="container" method="post" th:object="${avaliador}"
 				th:action="@{/avaliador/save}">
 
@@ -35,62 +66,81 @@
 						</div>
 					</div>
 				</div>
-				
-				<div class="form-group row">                                                          
-					<div class="col-md-4" th:classappend="${#fields.hasErrors('nome')}? 'has-error'">
-					    <label>Nome</label>
-					    <input type="text" class="form-control input-sm" th:field="*{nome}" autofocus="autofocus" maxlength="150"/>
+
+				<div class="row">
+					<div class="col-lg-12">
+						<fieldset>
+							<div class="form-group row">
+								<div class="col-md-7 mb-3 mb-sm-0"
+									th:classappend="${#fields.hasErrors('nome')}? 'has-error'">
+									<label>Nome</label> <input type="text"
+										class="form-control input-sm" th:field="*{nome}"
+										autofocus="autofocus" maxlength="150" />
+								</div>
+
+
+
+								<div class="col-md-5 mb-3 mb-sm-0"
+									th:classappend="${#fields.hasErrors('cpf')}? 'has-error'">
+									<label>CPF</label> <input type="text"
+										class="form-control input-sm" th:field="*{cpf}"
+										autofocus="autofocus"
+										onkeydown="javascript: fMasc( this, mCPF );"
+										placeholder="Ex.: 000.000.000-00" maxlength="14" />
+								</div>
+
+							</div>
+						</fieldset>
+						<br>
+
+						<fieldset>
+							<div class="form-group row">
+								<div class="col-md-4 mb-3 mb-sm-0"
+									th:classappend="${#fields.hasErrors('sexo')}? 'has-error'">
+									<label>Sexo:</label> <select th:field="*{sexo}"
+										class="form-control form-control">
+										<option selected value="-1">Selecione um Sexo</option>
+										<option th:value="Masculino">Masculino</option>
+										<option th:value="Feminino">Feminino</option>
+									</select>
+								</div>
+
+								<div class="col-sm-4 mb-3 mb-sm-0" name="data"
+									th:classappend="${#fields.hasErrors('dataNascimento')}? 'has-error'">
+									<label>Data de Nascimento:</label> <input type="date"
+										class="form-control form-control" th:field="*{dataNascimento}"
+										data-mask="00/00/0000" maxlength="150" />
+
+								</div>
+
+								<div class="col-md-4 mb-3 mb-sm-0"
+									th:classappend="${#fields.hasErrors('fumante')}? 'has-error'">
+									<label>Fumante</label> <select th:field="*{fumante}"
+										class="form-control">
+										<option th:value="${false}">Não</option>
+										<option th:value="${true}">Sim</option>
+									</select>
+								</div>
+
+							</div>
+						</fieldset>
+						<br> <br>
 					</div>
 				</div>
-				
-				<div class="form-group row">                                                          
-					<div class="col-md-4" th:classappend="${#fields.hasErrors('cpf')}? 'has-error'">
-					    <label>CPF</label>
-					    <input type="text" class="form-control input-sm" th:field="*{cpf}" autofocus="autofocus" maxlength="150"/>
-					</div>
-				</div>
-				
-				<div class="form-group row">
-					<label>Sexo:</label> <select th:field="*{sexo}"
-						class="form-control form-control">
-						<option selected value="-1">Selecione um Sexo</option>
-						<option th:value="Masculino">Masculino</option>
-						<option th:value="Feminino">Feminino</option>
-					</select>
-				</div>
-				
-				
-				
-				<div class="form-group row">
-					<div class="col-sm-4 mb-3 mb-sm-0" name="data"
-						th:classappend="${#fields.hasErrors('dataNascimento')}? 'has-error'">
-						<label>Data de Nascimento:</label> <input type="date"
-							class="form-control form-control" th:field="*{dataNascimento}"
-							data-mask="00/00/0000" maxlength="150" />
-					</div>
-				</div>
-				
-				
-				<label>Fumante</label>
-				 <div class="form-group row">
-					<select th:field="*{fumante}" class="form-control">
-						<option th:value="${false}" >Não</option>
-						<option th:value="${true}" >Sim</option>						
-					</select>
-				</div>
-				
 
 				<div class="form-group row">
 					<button type="submit" class="btn btn-primary">Cadastrar</button>
-					<button><a th:href="@{/}" class="btn btn-sm btn-danger">Cancelar</a></button>
+					<button>
+						<a th:href="@{/}" class="btn btn-sm btn-danger">Cancelar</a>
+					</button>
 				</div>
 
 			</form>
 
 		</div>
-		</div>
+	</div>
 </body>
 </html>
 
 
-	
+

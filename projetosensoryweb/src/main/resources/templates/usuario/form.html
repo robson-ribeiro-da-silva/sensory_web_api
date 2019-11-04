@@ -4,15 +4,36 @@
 <meta charset="UTF-8" />
 <title>Cadastro de Usuario</title>
 
+<script type="text/javascript">
+	function fMasc(objeto, mascara) {
+		obj = objeto
+		masc = mascara
+		setTimeout("fMascEx()", 1)
+	}
+	function fMascEx() {
+		obj.value = masc(obj.value)
+	}
+
+	function mCPF(cpf) {
+		cpf = cpf.replace(/\D/g, "")
+		cpf = cpf.replace(/(\d{3})(\d)/, "$1.$2")
+		cpf = cpf.replace(/(\d{3})(\d)/, "$1.$2")
+		cpf = cpf.replace(/(\d{3})(\d{1,2})$/, "$1-$2")
+		return cpf
+	}
+</script>
+
 </head>
 
 </head>
 <body>
-		<div class="content-wrapper" layout:fragment="corpo">
-			<div class="panel panel-default">
-				<div class="panel-heading">
+	<div class="content-wrapper" layout:fragment="corpo">
+		<div class="panel panel-default">
+			<div align="center" class="panel-heading">
+				<h5>
 					<strong>Cadastro de Usuarios</strong>
-				</div>
+				</h5>
+			</div>
 			<form class="container" method="post" th:object="${usuario}"
 				th:action="@{/usuario/save}">
 
@@ -35,83 +56,128 @@
 						</div>
 					</div>
 				</div>
-				
-				<div class="form-group row">                                                          
-					<div class="col-md-4" th:classappend="${#fields.hasErrors('nome')}? 'has-error'">
-					    <label>Nome</label>
-					    <input type="text" class="form-control input-sm" th:field="*{nome}" autofocus="autofocus" maxlength="150"/>
+
+				<div class="row">
+					<div class="col-lg-12">
+						<fieldset>
+							<div class="form-group row">
+								<div class="col-md-7 mb-3 mb-sm-0"
+									th:classappend="${#fields.hasErrors('nome')}? 'has-error'">
+									<label>Nome</label> <input type="text"
+										class="form-control input-sm" th:field="*{nome}"
+										autofocus="autofocus" maxlength="150" />
+								</div>
+
+
+
+								<div class="col-md-5 mb-3 mb-sm-0"
+									th:classappend="${#fields.hasErrors('cpf')}? 'has-error'">
+									<label>CPF</label> <input type="text"
+										class="form-control input-sm" th:field="*{cpf}"
+										autofocus="autofocus"
+										onkeydown="javascript: fMasc( this, mCPF );"
+										placeholder="Ex.: 000.000.000-00" maxlength="14" />
+								</div>
+							</div>
+						</fieldset>
+						<br>
+
+						<fieldset>
+							<div class="form-group row">
+								<div class="col-md-3 mb-3 mb-sm-0"
+									th:classappend="${#fields.hasErrors('sexo')}? 'has-error'">
+									<label>Sexo</label> <select th:field="*{sexo}"
+										class="form-control form-control">
+										<option selected value="-1">Selecione um Sexo</option>
+										<option th:value="Masculino">Masculino</option>
+										<option th:value="Feminino">Feminino</option>
+									</select>
+								</div>
+
+
+
+								<div class="col-sm-4 mb-3 mb-sm-0" name="data"
+									th:classappend="${#fields.hasErrors('dataNascimento')}? 'has-error'">
+									<label>Data de Nascimento</label> <input type="date"
+										class="form-control form-control" th:field="*{dataNascimento}"
+										data-mask="00/00/0000" maxlength="150" />
+								</div>
+
+
+								<div class="col-sm-5 mb-3 mb-sm-0"
+									th:classappend="${#fields.hasErrors('email')}? 'has-error'">
+									<label>E-mail</label> <input type="email"
+										class="form-control input-sm" th:field="*{email}"
+										maxlength="150" />
+								</div>
+							</div>
+						</fieldset>
+						<br>
+
+						<fieldset>
+							<div class="form-group row">
+								<div class="col-sm-4 mb-3 mb-sm-0"
+									th:classappend="${#fields.hasErrors('username')}? 'has-error'">
+									<label>Crie um Nome de Usuario</label> <input type="text"
+										class="form-control input-sm" th:field="*{username}"
+										maxlength="150" />
+								</div>
+
+
+
+								<div class="col-sm-4 mb-3 mb-sm-0"
+									th:classappend="${#fields.hasErrors('password')}? 'has-error'">
+									<label>Crie uma Senha</label> <input type="password"
+										class="form-control input-sm" th:field="*{password}"
+										id="txtSenha" name="senha" maxlength="150" />
+								</div>
+
+								<div class="col-md-4 mb-3 mb-sm-0">
+									<label>Confirme a Senha</label> <input type="password"
+										class="form-control form-control" maxlength="150"
+										id="repetir_senha" name="repetir_senha" required
+										oninput="validaSenha(this)" />
+								</div>
+							</div>
+						</fieldset>
+						<br>
+
+						<fieldset>
+							<div class="form-group row">
+								<div class="col-md-3 mb-3 mb-sm-0">
+									<label>Selecione o(s) Papel(is):</label>
+									<div class="form-group">
+
+										<div th:each="role : ${roles}">
+											<input type="checkbox" th:field="*{role}"
+												th:value="${role.id}"><span th:text="${'  '}"></span><span
+												th:text="${role.nome}"></span><br>
+										</div>
+
+									</div>
+								</div>
+							</div>
+						</fieldset>
+						<br>
+						<br>
+
 					</div>
 				</div>
-				
-				<div class="form-group row">                                                          
-					<div class="col-md-4" th:classappend="${#fields.hasErrors('cpf')}? 'has-error'">
-					    <label>CPF</label>
-					    <input type="text" class="form-control input-sm" th:field="*{cpf}" autofocus="autofocus" maxlength="150"/>
-					</div>
-				</div>
-				
-				<div class="form-group row">
-					<label>Sexo:</label> <select th:field="*{sexo}"
-						class="form-control form-control">
-						<option selected value="-1">Selecione um Sexo</option>
-						<option th:value="Masculino">Masculino</option>
-						<option th:value="Feminino">Feminino</option>
-					</select>
-				</div>
-				
-				
-				<div class="form-group row">
-					<div class="col-sm-4 mb-3 mb-sm-0" name="data"
-						th:classappend="${#fields.hasErrors('dataNascimento')}? 'has-error'">
-						<label>Data de Nascimento:</label> <input type="date"
-							class="form-control form-control" th:field="*{dataNascimento}"
-							data-mask="00/00/0000" maxlength="150" />
-					</div>
-				</div>
-				
-				
-				<div class="form-group row">
-					<div class="col-md-4" th:classappend="${#fields.hasErrors('email')}? 'has-error'">
-						<label>Email</label> 
-						<input type="email" class="form-control input-sm" th:field="*{email}" maxlength="150"/>
-					</div>
-				</div>
-				
-				<div class="form-group row">
-					<div class="col-md-4" th:classappend="${#fields.hasErrors('username')}? 'has-error'">
-						<label>Crie um Username</label> 
-						<input type="text" class="form-control input-sm" th:field="*{username}" maxlength="150"/>
-					</div>
-				</div>
-				
-				<div class="form-group row">
-					<div class="col-md-4" th:classappend="${#fields.hasErrors('password')}? 'has-error'">
-						<label>Crie uma Senha</label> 
-						<input type="password" class="form-control input-sm" th:field="*{password}" maxlength="150"/>
-					</div>
-				</div>
-				
-				<label>Selecione o(s) Papel(is):</label>
-				 <div class="form-group">
-				
-					 <div th:each="role : ${roles}">
-						 <input type="checkbox" th:field="*{role}" th:value="${role.id}"><span th:text="${'  '}"></span><span th:text="${role.nome}"></span><br>
-					 </div>
-				 
-				 </div>
-				
+
 
 				<div class="form-group row">
 					<button type="submit" class="btn btn-primary">Cadastrar</button>
-					<button><a th:href="@{/}" class="btn btn-sm btn-danger">Cancelar</a></button>
+					<button>
+						<a th:href="@{/}" class="btn btn-sm btn-danger">Cancelar</a>
+					</button>
 				</div>
 
 			</form>
 
 		</div>
-		</div>
+	</div>
 </body>
 </html>
 
 
-	
+

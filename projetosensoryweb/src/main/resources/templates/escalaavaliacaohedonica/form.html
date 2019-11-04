@@ -8,11 +8,13 @@
 
 </head>
 <body>
-		<div class="content-wrapper" layout:fragment="corpo">
-			<div class="panel panel-default">
-				<div class="panel-heading">
-					<strong>Cadastro de Analise Sensorial</strong>
-				</div>
+	<div class="content-wrapper" layout:fragment="corpo">
+		<div class="panel panel-default">
+			<div align="center" class="panel-heading">
+				<h5>
+					<strong>Cadastro de Análise Sensorial</strong>
+				</h5>
+			</div>
 			<form class="container" method="post" th:object="${escala}"
 				th:action="@{/analisesensorial/saveescala}">
 
@@ -35,28 +37,35 @@
 						</div>
 					</div>
 				</div>
-				
-				<label>Selecione os quesitos de avaliação:</label>
-				 <div class="form-group">
-				
-					 <div th:each="avaliacaohedonica : ${avaliacoes}">
-						 <input type="checkbox" th:field="*{avaliacaohedonica}" th:value="${avaliacaohedonica.id}"><span th:text="${'  '}"></span><span th:text="${avaliacaohedonica.pergunta}"></span><br>
-					 </div>
-				 
-				 </div>
-				
+
+				<fieldset>
+					<label><strong>Selecione os quesitos de avaliação:</strong></label>
+					<div class="form-group">
+
+						<div th:each="avaliacaohedonica : ${avaliacoes}">
+							<input type="checkbox" th:field="*{avaliacaohedonica}"
+								th:value="${avaliacaohedonica.id}"><span
+								th:text="${'  '}"></span><span
+								th:text="${avaliacaohedonica.pergunta}"></span><br>
+						</div>
+
+					</div>
+				</fieldset>
+				<br> <br>
 
 				<div class="form-group row">
 					<button type="submit" class="btn btn-primary">Cadastrar</button>
-					<button><a th:href="@{/}" class="btn btn-sm btn-danger">Cancelar</a></button>
+					<button>
+						<a th:href="@{/}" class="btn btn-sm btn-danger">Cancelar</a>
+					</button>
 				</div>
 
 			</form>
 
 		</div>
-		</div>
+	</div>
 </body>
 </html>
 
 
-	
+
