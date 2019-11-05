@@ -12,6 +12,8 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.LazyCollection;
@@ -30,6 +32,8 @@ public class Produto implements Serializable {
 	@GenericGenerator(name = "increment", strategy = "increment")
 	private Long id;
 	
+	@NotNull
+	@NotEmpty(message = "Nome não pode ser vazio.")
 	private String nome;
 	
 	private String descricao;

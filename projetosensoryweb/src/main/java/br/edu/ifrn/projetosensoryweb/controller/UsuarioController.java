@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import br.edu.ifrn.projetosensoryweb.model.Role;
 import br.edu.ifrn.projetosensoryweb.model.Usuario;
 import br.edu.ifrn.projetosensoryweb.service.RoleService;
 import br.edu.ifrn.projetosensoryweb.service.UsuarioService;
@@ -31,7 +32,7 @@ public class UsuarioController {
 		
 		ModelAndView mv = new ModelAndView("usuario/form");
 		mv.addObject("usuario", usuario);
-		mv.addObject("roles", servicerole.buscarTodos());
+		mv.addObject("role", servicerole.findByUsername("ADM"));
 		
 		return mv;
 	}
@@ -42,6 +43,9 @@ public class UsuarioController {
 		if(result.hasErrors()) {
 			return add(usuario);
 		}
+		
+		Role role = servicerole.findByUsername("COR");
+		usuario.getRole().add(role);
 		
 		String senha = usuario.getPassword();
 		usuario.setPassword(new BCryptPasswordEncoder().encode(senha));

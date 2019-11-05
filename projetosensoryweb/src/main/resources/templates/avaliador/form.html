@@ -73,7 +73,7 @@
 							<div class="form-group row">
 								<div class="col-md-7 mb-3 mb-sm-0"
 									th:classappend="${#fields.hasErrors('nome')}? 'has-error'">
-									<label>Nome</label> <input type="text"
+									<label>Nome</label> <input type="text" required="required"
 										class="form-control input-sm" th:field="*{nome}"
 										autofocus="autofocus" maxlength="150" />
 								</div>
@@ -82,7 +82,7 @@
 
 								<div class="col-md-5 mb-3 mb-sm-0"
 									th:classappend="${#fields.hasErrors('cpf')}? 'has-error'">
-									<label>CPF</label> <input type="text"
+									<label>CPF</label> <input type="text" required="required"
 										class="form-control input-sm" th:field="*{cpf}"
 										autofocus="autofocus"
 										onkeydown="javascript: fMasc( this, mCPF );"
@@ -98,7 +98,7 @@
 								<div class="col-md-4 mb-3 mb-sm-0"
 									th:classappend="${#fields.hasErrors('sexo')}? 'has-error'">
 									<label>Sexo:</label> <select th:field="*{sexo}"
-										class="form-control form-control">
+										required="required" class="form-control form-control">
 										<option selected value="-1">Selecione um Sexo</option>
 										<option th:value="Masculino">Masculino</option>
 										<option th:value="Feminino">Feminino</option>
@@ -108,15 +108,16 @@
 								<div class="col-sm-4 mb-3 mb-sm-0" name="data"
 									th:classappend="${#fields.hasErrors('dataNascimento')}? 'has-error'">
 									<label>Data de Nascimento:</label> <input type="date"
-										class="form-control form-control" th:field="*{dataNascimento}"
-										data-mask="00/00/0000" maxlength="150" />
+										required="required" class="form-control form-control"
+										th:field="*{dataNascimento}" data-mask="00/00/0000"
+										maxlength="150" />
 
 								</div>
 
 								<div class="col-md-4 mb-3 mb-sm-0"
 									th:classappend="${#fields.hasErrors('fumante')}? 'has-error'">
 									<label>Fumante</label> <select th:field="*{fumante}"
-										class="form-control">
+										required="required" class="form-control">
 										<option th:value="${false}">Não</option>
 										<option th:value="${true}">Sim</option>
 									</select>

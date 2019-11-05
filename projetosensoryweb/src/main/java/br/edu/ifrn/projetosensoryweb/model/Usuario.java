@@ -13,6 +13,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.LazyCollection;
@@ -43,22 +46,34 @@ public class Usuario implements UserDetails {
 	private Long id;
 	
 	@Column(unique = true)
-	//@Size(min = 4, message = "USERNAME dev ter pelo menos 4 letras")
+	@NotNull
+	@NotEmpty(message = "Nome de Usuario não pode ser vazio.")
+	@Size(min = 4, message = "O Nome de Usuario deve ter pelo menos 4 letras")
 	private String username;
 	
-	//@NotNull
-	//@NotEmpty(message = "Password não pode ser vazio.")
-	//@Size(min = 6, message = "Password deve ser no mínimo 6 caracter.")
+	@NotNull
+	@NotEmpty(message = "Senha não pode ser vazio.")
+	@Size(min = 5, message = "A Senha deve possuir no mínimo 5 caracteres.")
 	private String password;
 	
+	@NotNull
+	@NotEmpty(message = "CPF não pode ser vazio.")
 	private String cpf;
 	
+	@NotNull
+	@NotEmpty(message = "Nome não pode ser vazio.")
 	private String nome;
 	
+	@NotNull
+	@NotEmpty(message = "Sexo não pode ser vazio.")
 	private String sexo;
 	
+	@NotNull
+	@NotEmpty(message = "E-mail não pode ser vazio.")
 	private String email;
 	
+	@NotNull
+	@NotEmpty(message = "Data de Nascimento não pode ser vazio.")
 	private String dataNascimento;
 	
 	private TipoUsuario tipousuario;

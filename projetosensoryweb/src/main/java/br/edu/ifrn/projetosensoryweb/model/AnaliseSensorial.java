@@ -11,6 +11,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 import org.hibernate.annotations.GenericGenerator;
 
@@ -29,16 +31,26 @@ public class AnaliseSensorial implements Serializable{
 	@GenericGenerator(name = "increment", strategy = "increment")
 	private Long id;
 	
+	@NotNull
+	@NotEmpty(message = "Descrição não pode ser vazio.")
 	private String descricao;
 	
+	@NotNull
+	@NotEmpty(message = "Local não pode ser vazio.")
 	private String local;
 	
+	@NotNull
+	@NotEmpty(message = "Sala não pode ser vazio.")
 	private String sala;
-	
+
 	private String alergias; 
 	
+	@NotNull
+	@NotEmpty(message = "Data não pode ser vazio.")
 	private String data;
 	
+	@NotNull
+	@NotEmpty(message = "Quantidade de amostras não pode ser vazio.")
 	private int qtdAmostras;
 	
 	private int totalProdutos;

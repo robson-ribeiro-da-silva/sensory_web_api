@@ -6,6 +6,8 @@ import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 import org.hibernate.annotations.GenericGenerator;
 
@@ -20,14 +22,24 @@ public class Avaliador implements Serializable {
 	@GenericGenerator(name = "increment", strategy = "increment")
 	private Long id;
 	
+	@NotNull
+	@NotEmpty(message = "CPF não pode ser vazio.")
 	private String cpf;
 	
+	@NotNull
+	@NotEmpty(message = "Nome não pode ser vazio.")
 	private String nome;
 	
+	@NotNull
+	@NotEmpty(message = "Sexo não pode ser vazio.")
 	private String sexo;
 	
+	@NotNull
+	@NotEmpty(message = "Data Nascimento não pode ser vazio.")
 	private String dataNascimento;
 	
+	@NotNull
+	@NotEmpty(message = "Fumante não pode ser vazio.")
 	private boolean fumante;
 	
 	public Long getId() {

@@ -48,21 +48,21 @@
 								<div class="col-sm-4 mb-3 mb-sm-0"
 									th:classappend="${#fields.hasErrors('descricao')}? 'has-error'">
 									<label>Descrição da Análise</label> <input type="text"
-										class="form-control input-sm" th:field="*{descricao}"
-										autofocus="autofocus" maxlength="150" />
+										required="required" class="form-control input-sm"
+										th:field="*{descricao}" autofocus="autofocus" maxlength="150" />
 								</div>
 
 
 								<div class="col-sm-4 mb-3 mb-sm-0"
 									th:classappend="${#fields.hasErrors('local')}? 'has-error'">
-									<label>Local</label> <input type="text"
+									<label>Local</label> <input type="text" required="required"
 										class="form-control input-sm" th:field="*{local}"
 										autofocus="autofocus" maxlength="150" />
 								</div>
 
 								<div class="col-sm-4 mb-3 mb-sm-0"
 									th:classappend="${#fields.hasErrors('sala')}? 'has-error'">
-									<label>Sala</label> <input type="text"
+									<label>Sala</label> <input type="text" required="required"
 										class="form-control input-sm" th:field="*{sala}"
 										autofocus="autofocus" maxlength="150" />
 
@@ -76,7 +76,7 @@
 							<div class="form-group row">
 								<div class="col-sm-3 mb-3 mb-sm-0" name="data"
 									th:classappend="${#fields.hasErrors('data')}? 'has-error'">
-									<label>Data:</label> <input type="date"
+									<label>Data:</label> <input type="date" required="required"
 										class="form-control form-control" th:field="*{data}"
 										data-mask="00/00/0000" maxlength="150" />
 								</div>
@@ -84,7 +84,7 @@
 
 								<div class="col-sm-6 mb-3 mb-sm-0"
 									th:classappend="${#fields.hasErrors('alergias')}? 'has-error'">
-									<label>Alergias</label> <input type="text"
+									<label>Alergias</label> <input type="text" 
 										class="form-control input-sm" th:field="*{alergias}"
 										autofocus="autofocus" maxlength="150" />
 
@@ -92,9 +92,10 @@
 
 								<div class="col-sm-3 mb-3 mb-sm-0"
 									th:classappend="${#fields.hasErrors('qtdAmostras')}? 'has-error'">
-									<label>Quantidade de Amostras</label> <input type="text"
+									<label>Quantidade de Amostras</label> <input type="number"
+										required="required" maxlength="3"
 										class="form-control input-sm" th:field="*{qtdAmostras}"
-										autofocus="autofocus" maxlength="150" />
+										autofocus="autofocus" />
 
 								</div>
 							</div>
@@ -105,7 +106,8 @@
 							<div class="form-group row">
 								<div class="col-sm-4 mb-3 mb-sm-0">
 									<label>Informe a Escala: </label> <select
-										th:field="*{escala.nome}" class="form-control">
+										th:field="*{escala.nome}" class="form-control"
+										required="required">
 										<option selected value="-1">selecione</option>
 										<option th:value="Hedonica">Hedônica</option>
 									</select>
@@ -113,19 +115,19 @@
 								</div>
 							</div>
 						</fieldset>
+
+						<br> <br>
+						<fieldset>
+							<div class="form-group row">
+								<button type="submit" class="btn btn-primary">Cadastrar</button>
+								<button>
+									<a th:href="@{/}" class="btn btn-sm btn-danger">Cancelar</a>
+								</button>
+							</div>
+						</fieldset>
 					</div>
 
 				</div>
-				<br>
-				<br>
-
-				<div class="form-group row">
-					<button type="submit" class="btn btn-primary">Cadastrar</button>
-					<button>
-						<a th:href="@{/}" class="btn btn-sm btn-danger">Cancelar</a>
-					</button>
-				</div>
-
 			</form>
 
 		</div>

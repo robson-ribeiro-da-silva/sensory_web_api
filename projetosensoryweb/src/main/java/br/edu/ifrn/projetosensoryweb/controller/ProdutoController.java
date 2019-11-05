@@ -51,9 +51,9 @@ public class ProdutoController {
 	@PostMapping("/save")
 	public ModelAndView save(@Valid Produto produto, BindingResult result) {
 		
-//		if(result.hasErrors()) {
-//			return add(analisesensorial);
-//		}
+		if(result.hasErrors()) {
+			return add(produto.getAnalisesensorial().getId(), produto);
+		}
 		AnaliseSensorial analise = produto.getAnalisesensorial();
 		
 		int totalProdutos = analise.getTotalProdutos();
