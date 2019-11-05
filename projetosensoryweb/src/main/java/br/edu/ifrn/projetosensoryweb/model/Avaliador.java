@@ -38,8 +38,6 @@ public class Avaliador implements Serializable {
 	@NotEmpty(message = "Data Nascimento não pode ser vazio.")
 	private String dataNascimento;
 	
-	@NotNull
-	@NotEmpty(message = "Fumante não pode ser vazio.")
 	private boolean fumante;
 	
 	public Long getId() {

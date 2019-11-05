@@ -49,8 +49,6 @@ public class AnaliseSensorial implements Serializable{
 	@NotEmpty(message = "Data não pode ser vazio.")
 	private String data;
 	
-	@NotNull
-	@NotEmpty(message = "Quantidade de amostras não pode ser vazio.")
 	private int qtdAmostras;
 	
 	private int totalProdutos;
