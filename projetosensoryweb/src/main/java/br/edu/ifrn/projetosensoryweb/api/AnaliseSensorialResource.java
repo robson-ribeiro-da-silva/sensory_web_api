@@ -28,101 +28,110 @@ import br.edu.ifrn.projetosensoryweb.service.RespostaHedonicaService;
 @RestController
 @RequestMapping("/api/analisesensorial")
 public class AnaliseSensorialResource {
-	
+
 	@Autowired
 	private AnaliseSensorialService service;
-	
+
 	@Autowired
 	private RespostaHedonicaService serviceresposta;
-	
+
 	@Autowired
 	private AmostraService serviceamostra;
-	
+
 	@Autowired
 	private AvaliacaoHedonicaService serviceavaliacao;
-	
+
 	@Autowired
 	private AvaliadorService serviceavaliador;
-	
-	@GetMapping(value="/findAll")
-	public ResponseEntity<List<AnaliseSensorial>> findAll(){
-		
+
+	@GetMapping(value = "/findAll")
+	public ResponseEntity<List<AnaliseSensorial>> findAll() {
+
 		List<AnaliseSensorial> analises = service.findAll();
-		
-		if(analises.isEmpty()){
-			return ResponseEntity.notFound().build();		
+
+		if (analises.isEmpty()) {
+			return ResponseEntity.notFound().build();
 		}
 
-		return  new ResponseEntity<>(analises, HttpStatus.OK);
+		return new ResponseEntity<>(analises, HttpStatus.OK);
 	}
-	
-	@GetMapping(value="/findById/{id}")
-	public ResponseEntity<AnaliseSensorial> findById(@PathVariable("id") Long id){
-		
-		if(id == null){
-			return ResponseEntity.notFound().build();		
+
+	@GetMapping(value = "/findById/{id}")
+	public ResponseEntity<AnaliseSensorial> findById(@PathVariable("id") Long id) {
+
+		if (id == null) {
+			return ResponseEntity.notFound().build();
 		}
-		
+
 		AnaliseSensorial analise = service.findByIdAnalise(id);
-		
-		if(analise == null){
-			return ResponseEntity.notFound().build();		
+
+		if (analise == null) {
+			return ResponseEntity.notFound().build();
 		}
 
-		return  ResponseEntity.ok(analise);
+		return ResponseEntity.ok(analise);
 	}
-	
-	
-	@GetMapping(value="/addResposta/{cpf}/{idanalise}/{codamostra}/{pergunta}/{resposta}")
-	public ResponseEntity<RespostaHedonica> addResposta(@PathVariable("cpf") String cpf, @PathVariable("idanalise") Long id, 
-			@PathVariable("codamostra") int codigoamostra, @PathVariable("pergunta") String pergunta,
-			@PathVariable("resposta") String resposta){
+
+	@GetMapping(value = "/addResposta/{cpf}/{idanalise}/{codamostra}/{pergunta}/{resposta}")
+	public ResponseEntity<RespostaHedonica> addResposta(@PathVariable("cpf") String cpf,
+			@PathVariable("idanalise") Long id, @PathVariable("codamostra") int codigoamostra,
+			@PathVariable("pergunta") String pergunta, @PathVariable("resposta") String resposta) {
 		/*
-		if(cpf == null || cpf == " "){
-			return ResponseEntity.notFound().build();	
-		}
-		
-		Avaliador avaliador = serviceavaliador.findByCpf(cpf);
-		
-		if(avaliador == null){
-			return ResponseEntity.notFound().build();	
-		}*/
-		
+		 * if(cpf == null || cpf == " "){ return
+		 * ResponseEntity.notFound().build(); }
+		 * 
+		 * Avaliador avaliador = serviceavaliador.findByCpf(cpf);
+		 * 
+		 * if(avaliador == null){ return ResponseEntity.notFound().build(); }
+		 */
+
 		Amostra amostra = serviceamostra.findByCodigo(codigoamostra);
-		
-		if(amostra == null){
-			return ResponseEntity.notFound().build();		
+
+		if (amostra == null) {
+			return ResponseEntity.notFound().build();
 		}
-		
+
+		List<RespostaHedonica> respostas = amostra.getRespostahedonica();
+
+		if (respostas != null) {
+			for (int i = 0; i < respostas.size(); i++) {
+				//System.out.println("aqui --- >");
+				if (respostas.get(i).getAvaliacaohedonica().getPergunta().equals(pergunta)) {
+					//System.out.println("Pergunta- ---- >" + respostas.get(i).getAvaliacaohedonica().getPergunta());
+					return ResponseEntity.notFound().build();
+				}
+			}
+		}
+
 		AvaliacaoHedonica avaliacao = serviceavaliacao.findByIdAnaliseAndPergunta(id, pergunta);
-		
-		if(avaliacao == null){
-			return ResponseEntity.notFound().build();		
+
+		if (avaliacao == null) {
+			return ResponseEntity.notFound().build();
 		}
 		RespostaHedonica respostaHedonica = new RespostaHedonica();
 		respostaHedonica.setAmostra(amostra);
 		respostaHedonica.setResposta(resposta);
 		respostaHedonica.setAvaliacaohedonica(avaliacao);
-		
+
 		serviceresposta.save(respostaHedonica);
 
-		return  ResponseEntity.ok(respostaHedonica);
+		return ResponseEntity.ok(respostaHedonica);
 	}
-	
-	@GetMapping(value="/findByIdAvaliacao/{id}")
-	public ResponseEntity<AvaliacaoHedonica> findByIdAvaliacao(@PathVariable("id") Long id){
-		
-		if(id == null){
-			return ResponseEntity.notFound().build();		
-		}
-		
-		AvaliacaoHedonica avaliacao = serviceavaliacao.findByIdAvaliacao(id);
-		
-		if(avaliacao == null){
-			return ResponseEntity.notFound().build();		
+
+	@GetMapping(value = "/findByIdAvaliacao/{id}")
+	public ResponseEntity<AvaliacaoHedonica> findByIdAvaliacao(@PathVariable("id") Long id) {
+
+		if (id == null) {
+			return ResponseEntity.notFound().build();
 		}
 
-		return  ResponseEntity.ok(avaliacao);
+		AvaliacaoHedonica avaliacao = serviceavaliacao.findByIdAvaliacao(id);
+
+		if (avaliacao == null) {
+			return ResponseEntity.notFound().build();
+		}
+
+		return ResponseEntity.ok(avaliacao);
 	}
 
 }

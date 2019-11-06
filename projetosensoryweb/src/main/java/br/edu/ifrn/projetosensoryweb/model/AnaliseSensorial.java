@@ -3,6 +3,7 @@ package br.edu.ifrn.projetosensoryweb.model;
 import java.io.Serializable;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -14,6 +15,7 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
+import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.GenericGenerator;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -52,8 +54,7 @@ public class AnaliseSensorial implements Serializable{
 	private int qtdAmostras;
 	
 	private int totalProdutos;
-	
-	
+
 	@OneToMany(mappedBy="analisesensorial")
 	private List<Produto> produtos;
 	
