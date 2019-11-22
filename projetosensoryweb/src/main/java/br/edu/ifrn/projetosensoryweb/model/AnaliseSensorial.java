@@ -53,7 +53,15 @@ public class AnaliseSensorial implements Serializable{
 	
 	private int qtdAmostras;
 	
+	private int qtdAmostrasDisponiveis;
+	
+	private StatusAnalise status;
+	
 	private int totalProdutos;
+	
+	private int qtdProdutos = 0;
+	
+	private String perguntaatual; 
 
 	@OneToMany(mappedBy="analisesensorial")
 	private List<Produto> produtos;
@@ -123,12 +131,44 @@ public class AnaliseSensorial implements Serializable{
 		this.totalProdutos = totalProdutos;
 	}
 
+	public int getQtdProdutos() {
+		return qtdProdutos;
+	}
+
+	public void setQtdProdutos(int qtdProdutos) {
+		this.qtdProdutos = qtdProdutos;
+	}
+
 	public int getQtdAmostras() {
 		return qtdAmostras;
 	}
 
 	public void setQtdAmostras(int qtdAmostras) {
 		this.qtdAmostras = qtdAmostras;
+	}
+
+	public String getPerguntaatual() {
+		return perguntaatual;
+	}
+
+	public void setPerguntaatual(String perguntaatual) {
+		this.perguntaatual = perguntaatual;
+	}
+
+	public int getQtdAmostrasDisponiveis() {
+		return qtdAmostrasDisponiveis;
+	}
+
+	public void setQtdAmostrasDisponiveis(int qtdAmostrasDisponiveis) {
+		this.qtdAmostrasDisponiveis = qtdAmostrasDisponiveis;
+	}
+
+	public StatusAnalise getStatus() {
+		return status;
+	}
+
+	public void setStatus(StatusAnalise status) {
+		this.status = status;
 	}
 
 	public static long getSerialversionuid() {

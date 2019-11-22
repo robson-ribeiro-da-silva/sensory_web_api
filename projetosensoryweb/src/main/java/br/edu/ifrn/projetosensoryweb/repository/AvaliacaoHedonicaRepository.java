@@ -6,7 +6,10 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
+import br.edu.ifrn.projetosensoryweb.model.AnaliseSensorial;
 import br.edu.ifrn.projetosensoryweb.model.AvaliacaoHedonica;
+import br.edu.ifrn.projetosensoryweb.model.StatusAnalise;
+import br.edu.ifrn.projetosensoryweb.model.StatusAvaliacaoHedonica;
 
 @Repository
 public interface AvaliacaoHedonicaRepository extends JpaRepository<AvaliacaoHedonica, Long>{
@@ -16,6 +19,9 @@ public interface AvaliacaoHedonicaRepository extends JpaRepository<AvaliacaoHedo
 	
 	@Query("select a from AvaliacaoHedonica a where a.id = ?1")
 	public AvaliacaoHedonica findByIdAvaliacao(Long id);
+	
+	@Query("select a from AvaliacaoHedonica a where a.status = ?1")
+	public List<AvaliacaoHedonica> findByStatus(StatusAvaliacaoHedonica status);
 	
 	
 }

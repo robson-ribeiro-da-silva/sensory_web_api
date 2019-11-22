@@ -9,6 +9,7 @@ import org.springframework.stereotype.Component;
 import br.edu.ifrn.projetosensoryweb.model.AvaliacaoHedonica;
 import br.edu.ifrn.projetosensoryweb.model.Escala;
 import br.edu.ifrn.projetosensoryweb.model.Role;
+import br.edu.ifrn.projetosensoryweb.model.StatusAvaliacaoHedonica;
 import br.edu.ifrn.projetosensoryweb.model.TipoUsuario;
 import br.edu.ifrn.projetosensoryweb.model.Usuario;
 import br.edu.ifrn.projetosensoryweb.service.AvaliacaoHedonicaService;
@@ -65,27 +66,32 @@ public class Inicializador implements ApplicationListener<ContextRefreshedEvent>
 			userService.save(admin);
 			
 			AvaliacaoHedonica a1 = new AvaliacaoHedonica();
+			a1.setStatus(StatusAvaliacaoHedonica.ATIVA);
 			a1.setPergunta("COR");
 			
 			serviceavaliacao.save(a1);
 			
 			AvaliacaoHedonica a2 = new AvaliacaoHedonica();
+			a2.setStatus(StatusAvaliacaoHedonica.ATIVA);
 			a2.setPergunta("SABOR");
 			
 			serviceavaliacao.save(a2);
 			
 			AvaliacaoHedonica a3 = new AvaliacaoHedonica();
+			a3.setStatus(StatusAvaliacaoHedonica.ATIVA);
 			a3.setPergunta("TEXTURA");
 			
 			serviceavaliacao.save(a3);
 			
 			AvaliacaoHedonica a4 = new AvaliacaoHedonica();
+			a4.setStatus(StatusAvaliacaoHedonica.ATIVA);
 			a4.setPergunta("APARENCIA");
 			
 			serviceavaliacao.save(a4);
 			
 			AvaliacaoHedonica a5 = new AvaliacaoHedonica();
-			a5.setPergunta("CHEIRO");
+			a5.setStatus(StatusAvaliacaoHedonica.ATIVA);
+			a5.setPergunta("ODOR");
 			
 			serviceavaliacao.save(a5);
 

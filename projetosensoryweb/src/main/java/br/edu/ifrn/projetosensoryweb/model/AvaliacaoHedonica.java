@@ -30,6 +30,8 @@ public class AvaliacaoHedonica implements Serializable {
 	
 	private String pergunta;
 	
+	private StatusAvaliacaoHedonica status;
+	
 	@JsonIgnore
 	@ManyToMany(mappedBy="avaliacaohedonica")
 	private List<Escala> escala;
@@ -53,7 +55,13 @@ public class AvaliacaoHedonica implements Serializable {
 		this.pergunta = pergunta;
 	}
 
-	
+	public StatusAvaliacaoHedonica getStatus() {
+		return status;
+	}
+
+	public void setStatus(StatusAvaliacaoHedonica status) {
+		this.status = status;
+	}
 
 	public List<Escala> getEscala() {
 		return escala;

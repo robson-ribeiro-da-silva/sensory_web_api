@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.edu.ifrn.projetosensoryweb.model.AnaliseSensorial;
+import br.edu.ifrn.projetosensoryweb.model.StatusAnalise;
 import br.edu.ifrn.projetosensoryweb.repository.AnaliseSensorialRepository;
 
 
@@ -43,6 +44,10 @@ public class AnaliseSensorialService {
 	
 	public List<AnaliseSensorial> findByIdUsuario(Long id){
 		return repository.findByIdUsuario(id);
+	}
+	
+	public List<AnaliseSensorial> findByStatus(StatusAnalise status){
+		return repository.findByStatus(status);
 	}
 
 }

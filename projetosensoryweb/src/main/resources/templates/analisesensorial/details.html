@@ -84,11 +84,17 @@
 							th:href="@{/analisesensorial/detailsamostras/{id}(id=${analisesensorial.id})}">Ver
 							Lista de Códigos das Amostras</a>
 					</div>
-					<div align="right">
+					<div align="center">
 					<a class="btn btn-sm btn-info"
 					th:href="@{/analisesensorial/respostasanalise/{id}(id=${analisesensorial.id})}">Ver
 					Respostas das Amostras</a>
 					</div>
+					<div align="right">
+					<a class="btn btn-sm btn-danger"
+					th:href="@{/analisesensorial/encerrar/{id}(id=${analisesensorial.id})}">Encerrar Análise</a>
+					</div>
+					
+					
 					</div>
 					<br>
 					<div class="panel-body">

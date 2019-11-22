@@ -28,6 +28,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
 				.antMatchers("/produto/**").hasAnyAuthority("ADM", "COR")
 				.antMatchers("/").hasAnyAuthority("ADM", "COR")
 				.antMatchers("/usuario/**").hasAnyAuthority("ADM")
+				.antMatchers("/avaliacaohedonica/**").hasAnyAuthority("ADM")
 				.antMatchers("/api/avaliador/**").permitAll()
 				.antMatchers("/api/analisesensorial/**").permitAll()
 				.antMatchers("http://**").permitAll()

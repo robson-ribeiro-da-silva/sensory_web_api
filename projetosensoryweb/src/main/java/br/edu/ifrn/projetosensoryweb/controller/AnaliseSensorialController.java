@@ -1,5 +1,8 @@
 package br.edu.ifrn.projetosensoryweb.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +18,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import br.edu.ifrn.projetosensoryweb.model.AnaliseSensorial;
 import br.edu.ifrn.projetosensoryweb.model.Escala;
+import br.edu.ifrn.projetosensoryweb.model.StatusAnalise;
+import br.edu.ifrn.projetosensoryweb.model.StatusAvaliacaoHedonica;
 import br.edu.ifrn.projetosensoryweb.model.Usuario;
 import br.edu.ifrn.projetosensoryweb.service.AnaliseSensorialService;
 import br.edu.ifrn.projetosensoryweb.service.AvaliacaoHedonicaService;
@@ -64,6 +69,9 @@ public class AnaliseSensorialController {
 			return add(analisesensorial, usuario);
 		}
 		
+		analisesensorial.setStatus(StatusAnalise.DISPONIVEL);
+		analisesensorial.setQtdAmostrasDisponiveis(analisesensorial.getQtdAmostras());
+		
 		Escala escala = analisesensorial.getEscala();
 		serviceescala.save(escala);
 		
@@ -89,9 +97,24 @@ public class AnaliseSensorialController {
 		
 		Usuario usuario = serviceusuario.findByUsername(user);
 		
+		List<AnaliseSensorial> analisesensoriais = new ArrayList<AnaliseSensorial>();
+		
+		List<AnaliseSensorial> analises = service.findByIdUsuario(usuario.getId());
+		
+		for(AnaliseSensorial a : analises){
+			if(a.getStatus() == StatusAnalise.DISPONIVEL){
+				analisesensoriais.add(a);
+			}
+		}
+		
+		for(AnaliseSensorial a1 : analises){
+			if(a1.getStatus() == StatusAnalise.ENCERRADA){
+				analisesensoriais.add(a1);
+			}
+		}
 		
 		ModelAndView mv = new ModelAndView("analisesensorial/lista");
-		mv.addObject("analisesensoriais", service.findByIdUsuario(usuario.getId()));
+		mv.addObject("analisesensoriais", analisesensoriais);
 		
 		return mv;
 	}
@@ -109,7 +132,7 @@ public class AnaliseSensorialController {
 	public ModelAndView findByIdAnalise(@PathVariable("id") Long id) {
 		
 		ModelAndView mv = new ModelAndView("analisesensorial/detailsamostras");
-		mv.addObject("analisesensorial", service.findOne(id));
+		mv.addObject("analisesensorial", service.findByIdAnalise(id));
 		
 		return mv;
 	}
@@ -126,7 +149,7 @@ public class AnaliseSensorialController {
 	@GetMapping("/edit/{id}")
 	public ModelAndView edit(@PathVariable("id") Long id) {
 		
-		return add(service.findOne(id), usuario);
+		return add(service.findByIdAnalise(id), usuario);
 	}
 	
 	@GetMapping("/delete/{id}")
@@ -141,12 +164,40 @@ public class AnaliseSensorialController {
 		return findAll(usuario);
 	}
 	
+	@GetMapping("/encerrar/{id}")
+	public ModelAndView encerrar(@PathVariable("id") Long id, @AuthenticationPrincipal UserDetails userDetails) {
+		
+		String user = userDetails.getUsername();
+		
+		Usuario usuario = serviceusuario.findByUsername(user);
+		
+		AnaliseSensorial analise = service.findByIdAnalise(id);
+		analise.setStatus(StatusAnalise.ENCERRADA);
+		service.save(analise);
+		
+		return findAll(usuario);
+	}
+	
+	@GetMapping("/excluir/{id}")
+	public ModelAndView excluir(@PathVariable("id") Long id, @AuthenticationPrincipal UserDetails userDetails) {
+		
+		String user = userDetails.getUsername();
+		
+		Usuario usuario = serviceusuario.findByUsername(user);
+		
+		AnaliseSensorial analise = service.findByIdAnalise(id);
+		analise.setStatus(StatusAnalise.EXCLUIDA);
+		service.save(analise);
+		
+		return findAll(usuario);
+	}
+	
 	@GetMapping("/addEscalaAvaliacaoHedonica")
 	public ModelAndView addEscalaAvaliacaoHedonica(@PathVariable("id") Long id) {
 		
 		ModelAndView mv = new ModelAndView("escalaavaliacaohedonica/form");
 		mv.addObject("escala", serviceescala.findOne(id));
-		mv.addObject("avaliacoes", serviceavaliacao.findAll());
+		mv.addObject("avaliacoes", serviceavaliacao.findByStatus(StatusAvaliacaoHedonica.ATIVA));
 		
 		return mv;
 	}

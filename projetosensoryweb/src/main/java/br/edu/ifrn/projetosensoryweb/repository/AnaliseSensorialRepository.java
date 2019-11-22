@@ -8,6 +8,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import br.edu.ifrn.projetosensoryweb.model.AnaliseSensorial;
+import br.edu.ifrn.projetosensoryweb.model.StatusAnalise;
 
 @Repository
 public interface AnaliseSensorialRepository extends JpaRepository<AnaliseSensorial, Long>{ 
@@ -21,4 +22,7 @@ public interface AnaliseSensorialRepository extends JpaRepository<AnaliseSensori
 	
 	@Query(value = "select a.* from analise_sensorial a where a.usuario_id = ?1", nativeQuery = true)
 	public List<AnaliseSensorial> findByIdUsuario(Long id);
+	
+	@Query("select a from AnaliseSensorial a where a.status = ?1")
+	public List<AnaliseSensorial> findByStatus(StatusAnalise status);
 }

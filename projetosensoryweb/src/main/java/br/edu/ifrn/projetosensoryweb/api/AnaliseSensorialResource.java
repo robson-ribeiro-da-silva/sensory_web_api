@@ -19,6 +19,7 @@ import br.edu.ifrn.projetosensoryweb.model.AvaliacaoHedonica;
 import br.edu.ifrn.projetosensoryweb.model.Avaliador;
 import br.edu.ifrn.projetosensoryweb.model.Escala;
 import br.edu.ifrn.projetosensoryweb.model.RespostaHedonica;
+import br.edu.ifrn.projetosensoryweb.model.StatusAnalise;
 import br.edu.ifrn.projetosensoryweb.service.AmostraService;
 import br.edu.ifrn.projetosensoryweb.service.AnaliseSensorialService;
 import br.edu.ifrn.projetosensoryweb.service.AvaliacaoHedonicaService;
@@ -47,7 +48,7 @@ public class AnaliseSensorialResource {
 	@GetMapping(value = "/findAll")
 	public ResponseEntity<List<AnaliseSensorial>> findAll() {
 
-		List<AnaliseSensorial> analises = service.findAll();
+		List<AnaliseSensorial> analises = service.findByStatus(StatusAnalise.DISPONIVEL);
 
 		if (analises.isEmpty()) {
 			return ResponseEntity.notFound().build();
@@ -84,7 +85,7 @@ public class AnaliseSensorialResource {
 		 * 
 		 * if(avaliador == null){ return ResponseEntity.notFound().build(); }
 		 */
-
+		int total = 0;
 		Amostra amostra = serviceamostra.findByCodigo(codigoamostra);
 
 		if (amostra == null) {
@@ -95,9 +96,10 @@ public class AnaliseSensorialResource {
 
 		if (respostas != null) {
 			for (int i = 0; i < respostas.size(); i++) {
-				//System.out.println("aqui --- >");
+				// System.out.println("aqui --- >");
 				if (respostas.get(i).getAvaliacaohedonica().getPergunta().equals(pergunta)) {
-					//System.out.println("Pergunta- ---- >" + respostas.get(i).getAvaliacaohedonica().getPergunta());
+					// System.out.println("Pergunta- ---- >" +
+					// respostas.get(i).getAvaliacaohedonica().getPergunta());
 					return ResponseEntity.notFound().build();
 				}
 			}
@@ -114,6 +116,24 @@ public class AnaliseSensorialResource {
 		respostaHedonica.setAvaliacaohedonica(avaliacao);
 
 		serviceresposta.save(respostaHedonica);
+
+		AnaliseSensorial analise = service.findByIdAnalise(id);
+
+		if (analise.getPerguntaatual() == null) {
+			analise.setPerguntaatual(pergunta);
+		}
+
+		if (analise.getPerguntaatual().equals(pergunta)) {
+
+			total = analise.getQtdAmostrasDisponiveis() - 1;
+			analise.setQtdAmostrasDisponiveis(total);
+
+			if (total == 0) {
+				analise.setStatus(StatusAnalise.ENCERRADA);
+			}
+
+			service.save(analise);
+		}
 
 		return ResponseEntity.ok(respostaHedonica);
 	}

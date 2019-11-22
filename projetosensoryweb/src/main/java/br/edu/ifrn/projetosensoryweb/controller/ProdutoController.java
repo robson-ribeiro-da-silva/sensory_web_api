@@ -58,7 +58,9 @@ public class ProdutoController {
 		
 		int totalProdutos = analise.getTotalProdutos();
 		
+		analise.setQtdProdutos(analise.getQtdProdutos()+1);
 		analise.setTotalProdutos(totalProdutos+1);
+		analise.setQtdAmostrasDisponiveis(analise.getQtdAmostras() * analise.getQtdProdutos());
 		
 		serviceanalise.save(analise);
 		
@@ -147,13 +149,13 @@ public class ProdutoController {
 		
 		Produto produto = service.findOne(id);
 		
-//		AnaliseSensorial analise = produto.getAnalisesensorial();
-//		
-//		int totalProdutos = analise.getTotalProdutos();
-//		
-//		analise.setTotalProdutos(totalProdutos-1);
-//		
-//		serviceanalise.save(analise);
+		AnaliseSensorial analise = produto.getAnalisesensorial();
+		
+		int qtdProdutos = analise.getQtdProdutos();
+		
+		analise.setQtdProdutos(qtdProdutos-1);
+		
+		serviceanalise.save(analise);
 		
 		Long idanalise = produto.getAnalisesensorial().getId();
 		

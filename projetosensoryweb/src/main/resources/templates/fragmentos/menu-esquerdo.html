@@ -51,8 +51,8 @@
 			<div sec:authorize="hasAuthority('COR')" >
 			<li class="nav-item"><a class="nav-link collapsed" href="#"
 				data-toggle="collapse" data-target="#collapseAnalise"
-				aria-expanded="false" aria-controls="collapseAnalise"> <i
-					class="fas fa-fw fa-users"></i> <span>Análise Sensorial</span>
+				aria-expanded="false" aria-controls="collapseAnalise"> <i class="fas fa-laugh-wink"></i>
+				 <span>Análise Sensorial</span>
 			</a>
 				<div id="collapseAnalise" class="collapse" aria-labelledby="headingTwo"
 					data-parent="#accordionSidebar">
@@ -82,7 +82,23 @@
 			
 			<hr class="sidebar-divider">
 			<div class="sidebar-heading">Configurações</div>
-
+			
+			<div sec:authorize="hasAuthority('ADM')">
+			<li class="nav-item"><a class="nav-link collapsed" href="#"
+				data-toggle="collapse" data-target="#collapseAvaliacao"
+				aria-expanded="false" aria-controls="collapseAvaliacao"> <i class="fas fa-clipboard-list fa-2x"></i> 
+				<span>Avaliação Hedônica</span>
+			</a>
+				<div id="collapseAvaliacao" class="collapse" aria-labelledby="headingTwo"
+					data-parent="#accordionSidebar">
+					<div class="bg-white py-2 collapse-inner rounded"> 
+							<a class="collapse-item" th:href="@{/avaliacaohedonica/add}">Cadastrar Nova</a> 
+<!-- 							<a class="collapse-item" th:href="@{/avaliacaohedonica/listar}">Listar Todas</a> -->
+					</div>
+				</div>
+			</li>
+			</div>
+			<hr class="sidebar-divider">
 			
 			<li class="nav-item"><a class="nav-link "th:href="@{/logout}">
 					<i class="fa fa-sign-out-alt" aria-hidden="true"></i> 

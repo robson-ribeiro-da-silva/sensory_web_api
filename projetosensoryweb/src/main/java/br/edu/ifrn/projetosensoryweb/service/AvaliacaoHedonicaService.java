@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.edu.ifrn.projetosensoryweb.model.AvaliacaoHedonica;
+import br.edu.ifrn.projetosensoryweb.model.StatusAvaliacaoHedonica;
 import br.edu.ifrn.projetosensoryweb.repository.AvaliacaoHedonicaRepository;
 
 
@@ -39,4 +40,7 @@ public class AvaliacaoHedonicaService {
 		return repository.findByIdAvaliacao(id);
 	}
 	
+	public List<AvaliacaoHedonica> findByStatus(StatusAvaliacaoHedonica status){
+		return repository.findByStatus(status);
+	}
 }

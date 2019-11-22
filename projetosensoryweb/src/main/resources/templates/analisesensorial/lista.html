@@ -26,7 +26,7 @@
 										<th>Descrição</th>
 										<th>Local</th>
 										<th>Sala</th>
-										<th>Alergias</th>
+										<th>Status</th>
 										<th>Data</th>
 										<th>Qtd Amostras</th>
 										<th>Ações</th>
@@ -37,7 +37,7 @@
 										<td th:text="${analisesensorial.descricao}"></td>
 										<td th:text="${analisesensorial.local}"></td>
 										<td th:text="${analisesensorial.sala}"></td>
-										<td th:text="${analisesensorial.alergias}"></td>
+										<td th:text="${analisesensorial.status}"></td>
 										<td th:text="${analisesensorial.data}"></td>
 										<td th:text="${analisesensorial.qtdAmostras}"></td>
 										<td>
@@ -46,9 +46,9 @@
 													<a class="btn btn-sm btn-info"
 														th:href="@{/analisesensorial/details/{id}(id=${analisesensorial.id})}">Visualizar</a>
 													<a class="btn btn-sm btn-primary"
-														th:href="@{/analisesensorial/edit/{id}(id=${analisesensorial.id})}">Editar</a>
+														th:href="@{/analisesensorial/encerrar/{id}(id=${analisesensorial.id})}">Encerrar</a>
 													<a class="delete btn btn-sm btn-danger"
-														th:href="@{/analisesensorial/delete/{id}(id=${analisesensorial.id})}">Excluir</a>
+														th:href="@{/analisesensorial/excluir/{id}(id=${analisesensorial.id})}">Excluir</a>
 													<a class="btn btn-sm btn-info"
 														th:href="@{/analisesensorial/respostasanalise/{id}(id=${analisesensorial.id})}">Ver
 														Respostas</a>
