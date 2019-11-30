@@ -10,6 +10,11 @@
 <body>
 	<div class="content-wrapper" layout:fragment="corpo">
 		<div class="panel panel-default">
+			<th:block th:if="${error != null}">
+				<div class="alert alert-danger">
+					<span th:text="${error}"></span>
+				</div>
+			</th:block>
 			<div align="center" class="panel-heading">
 				<h5>
 					<strong>Cadastro de Análise Sensorial</strong>
@@ -84,7 +89,7 @@
 
 								<div class="col-sm-6 mb-3 mb-sm-0"
 									th:classappend="${#fields.hasErrors('alergias')}? 'has-error'">
-									<label>Alergias</label> <input type="text" 
+									<label>Alergias</label> <input type="text"
 										class="form-control input-sm" th:field="*{alergias}"
 										autofocus="autofocus" maxlength="150" />
 
@@ -108,7 +113,7 @@
 									<label>Informe a Escala: </label> <select
 										th:field="*{escala.nome}" class="form-control"
 										required="required">
-										<option selected value="-1">selecione</option>
+<!-- 										<option selected value="-1">selecione</option> -->
 										<option selected th:value="Hedonica">Hedônica</option>
 									</select>
 

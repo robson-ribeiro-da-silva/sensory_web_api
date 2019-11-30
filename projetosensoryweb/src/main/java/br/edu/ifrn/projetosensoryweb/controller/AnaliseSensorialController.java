@@ -66,7 +66,7 @@ public class AnaliseSensorialController {
 	public ModelAndView save(@Valid AnaliseSensorial analisesensorial, BindingResult result) {
 		
 		if(result.hasErrors()) {
-			return add(analisesensorial, usuario);
+			return add(analisesensorial, usuario).addObject("error", "Erro ao adicionar análise! tente novamente por favor.");
 		}
 		
 		analisesensorial.setStatus(StatusAnalise.DISPONIVEL);
@@ -81,7 +81,7 @@ public class AnaliseSensorialController {
 			escala.setNome("Hedonica");
 			serviceescala.save(escala);
 			//System.out.println("------ > entrou");
-			return addEscalaAvaliacaoHedonica(analisesensorial.getEscala().getId());
+			return addEscalaAvaliacaoHedonica(analisesensorial.getEscala().getId()).addObject("success", "Análise adicionada com sucesso! Selecione a avaliação para finalizar.");
 		}else{
 			//System.out.println("------ > não entrou");
 			return findById(analisesensorial.getId());
@@ -175,7 +175,7 @@ public class AnaliseSensorialController {
 		analise.setStatus(StatusAnalise.ENCERRADA);
 		service.save(analise);
 		
-		return findAll(usuario);
+		return findAll(usuario).addObject("success", "Análise encerrada com sucesso!");
 	}
 	
 	@GetMapping("/excluir/{id}")
@@ -189,7 +189,7 @@ public class AnaliseSensorialController {
 		analise.setStatus(StatusAnalise.EXCLUIDA);
 		service.save(analise);
 		
-		return findAll(usuario);
+		return findAll(usuario).addObject("success", "Análise removida com sucesso!");
 	}
 	
 	@GetMapping("/addEscalaAvaliacaoHedonica")
@@ -214,7 +214,7 @@ public class AnaliseSensorialController {
 		
 		AnaliseSensorial analise = service.findByIdEscala(escala.getId());
 		
-		return findById(analise.getId());
+		return findById(analise.getId()).addObject("success", "Análise salva com sucesso!");
 		
 		
 		

@@ -34,12 +34,12 @@ public class AvaliadorController {
 	public ModelAndView save(@Valid Avaliador avaliador, BindingResult result) {
 		
 		if(result.hasErrors()) {
-			return add(avaliador);
+			return add(avaliador).addObject("error", "Erro ao tentar adiconar avaliador");
 		}
 		
 		service.save(avaliador);
 		
-		return findAll();
+		return findAll().addObject("success", "Avaliador adicionado com sucesso!");
 	}
 	
 	
@@ -54,7 +54,7 @@ public class AvaliadorController {
 		
 		service.delete(id);
 		
-		return findAll();
+		return findAll().addObject("success", "Avaliador removido com sucesso!");
 	}
 	
 	@GetMapping("/listar")

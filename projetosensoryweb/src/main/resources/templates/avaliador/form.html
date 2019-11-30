@@ -39,6 +39,11 @@
 <body>
 	<div class="content-wrapper" layout:fragment="corpo">
 		<div class="panel panel-default">
+			<th:block th:if="${error != null}">
+				<div class="alert alert-danger">
+					<span th:text="${error}"></span>
+				</div>
+			</th:block>
 			<div align="center" class="panel-heading">
 				<h5>
 					<strong>Cadastro de Avaliadores</strong>
@@ -99,7 +104,7 @@
 									th:classappend="${#fields.hasErrors('sexo')}? 'has-error'">
 									<label>Sexo:</label> <select th:field="*{sexo}"
 										required="required" class="form-control form-control">
-										<option selected value="-1">Selecione um Sexo</option>
+										<!-- 										<option selected value="-1">Selecione um Sexo</option> -->
 										<option th:value="Masculino">Masculino</option>
 										<option th:value="Feminino">Feminino</option>
 									</select>

@@ -52,7 +52,7 @@ public class ProdutoController {
 	public ModelAndView save(@Valid Produto produto, BindingResult result) {
 		
 		if(result.hasErrors()) {
-			return add(produto.getAnalisesensorial().getId(), produto);
+			return add(produto.getAnalisesensorial().getId(), produto).addObject("error", "Erro ao adicionar produto! Tente novamente por favor.");
 		}
 		AnaliseSensorial analise = produto.getAnalisesensorial();
 		
@@ -81,7 +81,7 @@ public class ProdutoController {
 		service.save(produto);
 		//serviceanalise.save(analise);
 		
-		return findAnaliseById(produto.getAnalisesensorial().getId());
+		return findAnaliseById(produto.getAnalisesensorial().getId()).addObject("success", "Produto adicionado com sucesso!");
 	}
 	
 	@GetMapping("/listar")
@@ -140,7 +140,7 @@ public class ProdutoController {
 		service.save(produto);
 		
 		
-		return findAnaliseById(produto.getAnalisesensorial().getId());
+		return findAnaliseById(produto.getAnalisesensorial().getId()).addObject("success", "Produto editado com sucesso!");
 	}
 	
 	@GetMapping("/delete/{id}")
@@ -165,7 +165,7 @@ public class ProdutoController {
 		}
 		//service.delete(id);
 		
-		return findAnaliseById(idanalise);
+		return findAnaliseById(idanalise).addObject("success", "Produto removido com sucesso!");
 	}
 
 	public static int aleatorios(int minimo, int maximo, int codigo) {

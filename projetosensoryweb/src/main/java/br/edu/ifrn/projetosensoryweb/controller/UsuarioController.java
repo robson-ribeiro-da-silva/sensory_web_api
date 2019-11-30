@@ -41,8 +41,15 @@ public class UsuarioController {
 	public ModelAndView save(@Valid Usuario usuario, BindingResult result) {
 		
 		if(result.hasErrors()) {
-			return add(usuario);
+			return add(usuario).addObject("error", "Erro ao tentar adiconar usuário");
 		}
+		
+		Usuario u = service.findByUsername(usuario.getUsername());
+		
+		if(u != null){
+			return add(usuario).addObject("error", "Esse nome de usuário já existe! tente outro por favor");
+		}
+		
 		
 		Role role = servicerole.findByUsername("COR");
 		usuario.getRole().add(role);
@@ -52,7 +59,7 @@ public class UsuarioController {
 		
 		service.save(usuario);
 		
-		return findAll();
+		return findAll().addObject("success", "Usuário adicionado com sucesso!");
 	}
 	
 	@GetMapping("/listar")
@@ -75,7 +82,7 @@ public class UsuarioController {
 		
 		service.delete(id);
 		
-		return findAll();
+		return findAll().addObject("success", "Usuário removido com sucesso!");
 	}
 
 }

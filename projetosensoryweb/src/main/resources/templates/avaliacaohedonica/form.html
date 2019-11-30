@@ -15,7 +15,8 @@
 					<strong>Cadastro de Avaliações do Tipo Hedônica</strong>
 				</h5>
 			</div>
-			<form class="container" method="post" th:object="${avaliacaohedonica}"
+			<form class="container" method="post"
+				th:object="${avaliacaohedonica}"
 				th:action="@{/avaliacaohedonica/save}">
 
 				<!--Input responsável em guardar o id-->
@@ -48,16 +49,16 @@
 										class="form-control input-sm" th:field="*{pergunta}"
 										autofocus="autofocus" maxlength="150" />
 								</div>
-								
-							
-							<div class="col-md-5 mb-3 mb-sm-0">
-							<br>
-								<button type="submit" class="btn btn-primary">Salvar</button>
-								<button>
-									<a th:href="@{/}" class="btn btn-sm btn-danger">Cancelar</a>
-								</button>
-							</div>
-							
+
+
+								<div class="col-md-5 mb-3 mb-sm-0">
+									<br>
+									<button type="submit" class="btn btn-primary">Salvar</button>
+									<button>
+										<a th:href="@{/}" class="btn btn-sm btn-danger">Cancelar</a>
+									</button>
+								</div>
+
 							</div>
 						</fieldset>
 						<br> <br>
@@ -67,57 +68,67 @@
 			</form>
 
 		</div>
-		
-		
-					<div class="col-lg-12" >
-		<div  class="panel panel-default">
-			<fieldset>
-				<div>
-					<div align="center" class="panel-heading">
-						<h5>
-							<strong>Lista de Avaliações do Tipo Hedônica</strong>
-						</h5>
+
+
+		<div class="col-lg-12">
+			<div class="panel panel-default">
+				<th:block th:if="${error != null}">
+					<div class="alert alert-danger">
+						<span th:text="${error}"></span>
 					</div>
-					<div class="panel-body">
-						<div class="table-responsive">
-							<table
-								class="table table-sm table-striped table-hover table-bordered">
-								<thead>
-									<tr>
-										<th>Pergunta</th>
-										<th>Ações</th>
-									</tr>
-								</thead>
-								<tbody>
-									<tr th:each="avaliacaohedonica : ${avaliacaohedonicas}">
-										<td th:text="${avaliacaohedonica.pergunta}"></td>
-										
-										<td>
-										<div align="center">
-												<div class="btn-group pull-right">
-													<a class="btn btn-sm btn-primary"
-														th:href="@{/avaliacaohedonica/edit/{id}(id=${avaliacaohedonica.id})}">Editar</a>
-													<a class="delete btn btn-sm btn-danger"
-														th:href="@{/avaliacaohedonica/delete/{id}(id=${avaliacaohedonica.id})}">Excluir</a>
+				</th:block>
+				<th:block th:if="${success != null}">
+					<div class="alert alert-success">
+						<span th:text="${success}"></span>
+					</div>
+				</th:block>
+				<fieldset>
+					<div>
+						<div align="center" class="panel-heading">
+							<h5>
+								<strong>Lista de Avaliações do Tipo Hedônica</strong>
+							</h5>
+						</div>
+						<div class="panel-body">
+							<div class="table-responsive">
+								<table
+									class="table table-sm table-striped table-hover table-bordered">
+									<thead>
+										<tr>
+											<th>Pergunta</th>
+											<th>Ações</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr th:each="avaliacaohedonica : ${avaliacaohedonicas}">
+											<td th:text="${avaliacaohedonica.pergunta}"></td>
+
+											<td>
+												<div align="center">
+													<div class="btn-group pull-right">
+														<a class="btn btn-sm btn-primary"
+															th:href="@{/avaliacaohedonica/edit/{id}(id=${avaliacaohedonica.id})}">Editar</a>
+														<a class="delete btn btn-sm btn-danger"
+															th:href="@{/avaliacaohedonica/delete/{id}(id=${avaliacaohedonica.id})}">Excluir</a>
+													</div>
 												</div>
-											</div>
-										</td>
-									</tr>
-								</tbody>
-							</table>
+											</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
 						</div>
 					</div>
+				</fieldset>
+				<br>
+				<div class="panel-footer">
+					<a class="btn btn-sm btn-success" th:href="@{/}">Sair</a>
 				</div>
-			</fieldset>
-			<br>
-			<div class="panel-footer">
-				<a class="btn btn-sm btn-success" th:href="@{/}">Sair</a>
-			</div>
 
+			</div>
 		</div>
-		</div>
-		</div>
-	
+	</div>
+
 </body>
 </html>
 

@@ -20,6 +20,16 @@
 
 	<div class="content-wrapper" layout:fragment="corpo">
 		<div class="panel panel-default">
+			<th:block th:if="${error != null}">
+				<div class="alert alert-danger">
+					<span th:text="${error}"></span>
+				</div>
+			</th:block>
+			<th:block th:if="${success != null}">
+				<div class="alert alert-success">
+					<span th:text="${success}"></span>
+				</div>
+			</th:block>
 			<fieldset>
 				<div>
 					<div class="panel-heading">
@@ -79,22 +89,23 @@
 						</h3>
 					</div>
 					<div class="row">
-					<div align="left">
-						<a class="btn btn-sm btn-primary"
-							th:href="@{/analisesensorial/detailsamostras/{id}(id=${analisesensorial.id})}">Ver
-							Lista de Códigos das Amostras</a>
-					</div>
-					<div align="center">
-					<a class="btn btn-sm btn-info"
-					th:href="@{/analisesensorial/respostasanalise/{id}(id=${analisesensorial.id})}">Ver
-					Respostas das Amostras</a>
-					</div>
-					<div align="right">
-					<a class="btn btn-sm btn-danger"
-					th:href="@{/analisesensorial/encerrar/{id}(id=${analisesensorial.id})}">Encerrar Análise</a>
-					</div>
-					
-					
+						<div align="left">
+							<a class="btn btn-sm btn-primary"
+								th:href="@{/analisesensorial/detailsamostras/{id}(id=${analisesensorial.id})}">Ver
+								Lista de Códigos das Amostras</a>
+						</div>
+						<div align="center">
+							<a class="btn btn-sm btn-info"
+								th:href="@{/analisesensorial/respostasanalise/{id}(id=${analisesensorial.id})}">Ver
+								Respostas das Amostras</a>
+						</div>
+						<div align="right">
+							<a class="btn btn-sm btn-danger"
+								th:href="@{/analisesensorial/encerrar/{id}(id=${analisesensorial.id})}">Encerrar
+								Análise</a>
+						</div>
+
+
 					</div>
 					<br>
 					<div class="panel-body">

@@ -46,7 +46,7 @@ public class AvaliacaoHedonicaController {
 		
 		AvaliacaoHedonica avaliacaohedonica1 = new AvaliacaoHedonica();
 		
-		return add(avaliacaohedonica1);
+		return add(avaliacaohedonica1).addObject("success", "Avaliação adicionada com sucesso!");
 	}
 	
 	@GetMapping("/listar")
@@ -75,7 +75,7 @@ public class AvaliacaoHedonicaController {
 		
 		AvaliacaoHedonica avaliacaohedonica1 = new AvaliacaoHedonica();
 		
-		return add(avaliacaohedonica1);
+		return add(avaliacaohedonica1).addObject("success", "Avaliação removida com sucesso!");
 	}
 
 }

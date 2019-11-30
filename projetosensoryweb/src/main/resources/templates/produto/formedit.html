@@ -10,6 +10,16 @@
 <body>
 	<div class="content-wrapper" layout:fragment="corpo">
 		<div class="panel panel-default">
+			<th:block th:if="${error != null}">
+				<div class="alert alert-danger">
+					<span th:text="${error}"></span>
+				</div>
+			</th:block>
+			<th:block th:if="${success != null}">
+				<div class="alert alert-success">
+					<span th:text="${success}"></span>
+				</div>
+			</th:block>
 			<div align="center" class="panel-heading">
 				<h5>
 					<strong>Edição de Produto da Análise</strong>
