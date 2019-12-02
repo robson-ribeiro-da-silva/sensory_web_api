@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.edu.ifrn.projetosensoryweb.model.Avaliador;
 import br.edu.ifrn.projetosensoryweb.service.AvaliadorService;
+//import io.swagger.annotations.ApiOperation;
 
 
 @RestController
@@ -19,7 +20,8 @@ public class AvaliadorResource {
 	@Autowired
 	private AvaliadorService service;
 	
-	@PostMapping(value="/addNew/{cpf}/{nome}/{sexo}/{dataNascimento}/{fumante}")
+	//@ApiOperation(value = "Adiciona um novo Avaliador")
+	@PostMapping(value="/addNew/{cpf}/{nome}/{sexo}/{dataNascimento}/{fumante}", produces="application/json", consumes="application/json")
 	public ResponseEntity<Avaliador> addNew(@PathVariable("cpf") String cpf, @PathVariable("nome") String nome, 
 			@PathVariable("sexo") String sexo, @PathVariable("dataNascimento") String dataNascimento,
 			@PathVariable("fumante") boolean fumante){
@@ -47,7 +49,8 @@ public class AvaliadorResource {
 		return ResponseEntity.ok(a);
 	}
 	
-	@GetMapping(value="/findByCpf/{cpf}")
+	//@ApiOperation(value = "Retorna um Avaliador pelo CPF")
+	@GetMapping(value="/findByCpf/{cpf}", produces="application/json")
 	public ResponseEntity<Avaliador> findByCpf(@PathVariable("cpf") String cpf){
 		
 		Avaliador avaliador = service.findByCpf(cpf);

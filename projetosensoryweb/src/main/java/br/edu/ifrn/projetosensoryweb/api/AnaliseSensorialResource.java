@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -25,6 +26,7 @@ import br.edu.ifrn.projetosensoryweb.service.AnaliseSensorialService;
 import br.edu.ifrn.projetosensoryweb.service.AvaliacaoHedonicaService;
 import br.edu.ifrn.projetosensoryweb.service.AvaliadorService;
 import br.edu.ifrn.projetosensoryweb.service.RespostaHedonicaService;
+//import io.swagger.annotations.ApiOperation;
 
 @RestController
 @RequestMapping("/api/analisesensorial")
@@ -45,7 +47,8 @@ public class AnaliseSensorialResource {
 	@Autowired
 	private AvaliadorService serviceavaliador;
 
-	@GetMapping(value = "/findAll")
+	//@ApiOperation(value = "Retorna uma lista de Análises")
+	@GetMapping(value = "/findAll", produces="application/json")
 	public ResponseEntity<List<AnaliseSensorial>> findAll() {
 
 		List<AnaliseSensorial> analises = service.findByStatus(StatusAnalise.DISPONIVEL);
@@ -57,7 +60,8 @@ public class AnaliseSensorialResource {
 		return new ResponseEntity<>(analises, HttpStatus.OK);
 	}
 
-	@GetMapping(value = "/findById/{id}")
+	//@ApiOperation(value = "Retorna uma Análise pelo ID")
+	@GetMapping(value = "/findById/{id}", produces="application/json")
 	public ResponseEntity<AnaliseSensorial> findById(@PathVariable("id") Long id) {
 
 		if (id == null) {
@@ -73,7 +77,8 @@ public class AnaliseSensorialResource {
 		return ResponseEntity.ok(analise);
 	}
 
-	@GetMapping(value = "/addResposta/{cpf}/{idanalise}/{codamostra}/{pergunta}/{resposta}")
+	//@ApiOperation(value = "Adiciona a resposta do avaliador")
+	@GetMapping(value = "/addResposta/{cpf}/{idanalise}/{codamostra}/{pergunta}/{resposta}", produces="application/json")
 	public ResponseEntity<RespostaHedonica> addResposta(@PathVariable("cpf") String cpf,
 			@PathVariable("idanalise") Long id, @PathVariable("codamostra") int codigoamostra,
 			@PathVariable("pergunta") String pergunta, @PathVariable("resposta") String resposta) {
@@ -138,7 +143,8 @@ public class AnaliseSensorialResource {
 		return ResponseEntity.ok(respostaHedonica);
 	}
 
-	@GetMapping(value = "/findByIdAvaliacao/{id}")
+	/*
+	@GetMapping(value = "/findByIdAvaliacao/{id}", produces="application/json")
 	public ResponseEntity<AvaliacaoHedonica> findByIdAvaliacao(@PathVariable("id") Long id) {
 
 		if (id == null) {
@@ -153,5 +159,6 @@ public class AnaliseSensorialResource {
 
 		return ResponseEntity.ok(avaliacao);
 	}
+	*/
 
 }
