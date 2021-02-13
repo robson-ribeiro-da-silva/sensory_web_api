@@ -91,7 +91,7 @@ public class AnaliseSensorialResource {
 		 * if(avaliador == null){ return ResponseEntity.notFound().build(); }
 		 */
 		int total = 0;
-		Amostra amostra = serviceamostra.findByCodigo(codigoamostra);
+		Amostra amostra = serviceamostra.findByIdAnaliseAndCodAmostra(id, codigoamostra);
 
 		if (amostra == null) {
 			return ResponseEntity.notFound().build();

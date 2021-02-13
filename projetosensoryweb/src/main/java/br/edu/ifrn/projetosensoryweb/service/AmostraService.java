@@ -34,5 +34,9 @@ public class AmostraService {
 	public Amostra findByCodigo(int codigo){
 		return repository.findByCodigo(codigo);
 	}
+	
+	public Amostra findByIdAnaliseAndCodAmostra(Long id, int codigo){
+		return repository.findByIdAnaliseAndCodAmostra(id, codigo);
+	}
 
 }
