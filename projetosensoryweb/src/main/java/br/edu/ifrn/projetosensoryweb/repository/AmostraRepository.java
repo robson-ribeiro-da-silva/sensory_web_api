@@ -14,6 +14,6 @@ public interface AmostraRepository extends JpaRepository<Amostra, Long>{
 	public Amostra findByCodigo(int codigo);
 	
 	//SELECT A.ID, A.CODIGO FROM AMOSTRA A INNER JOIN PRODUTO P ON A.PRODUTO_ID = P.ID WHERE P.ANALISESENSORIAL_ID = 4 AND A.CODIGO = 	1167
-	@Query(value = "SELECT A.* FROM AMOSTRA A INNER JOIN PRODUTO P ON(A.PRODUTO_ID = P.ID) WHERE P.ANALISESENSORIAL_ID = ?1 AND A.CODIGO = ?2", nativeQuery = true)
+	@Query(value = "select a.* from Amostra a inner join Produto p on(a.produto_id = p.id) where p.analisesensorial_id = ?1 and a.codigo = ?2", nativeQuery = true)
 	public Amostra findByIdAnaliseAndCodAmostra(Long id, int codigo);
 }
