@@ -4,17 +4,20 @@ import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
+@Table(name="Amostra")
 public class Amostra implements Serializable {
 
 	
@@ -23,12 +26,15 @@ public class Amostra implements Serializable {
 	@Id
 	@GeneratedValue(generator = "increment")
 	@GenericGenerator(name = "increment", strategy = "increment")
+	@Column(name="id")
 	private Long id;
 	
+	@Column(name="codigo")
 	private int codigo;
 	
 	@JsonIgnore
 	@ManyToOne(cascade = {CascadeType.ALL})
+	//@Column(name="produto_id")
 	private Produto produto;
 	
 	@JsonIgnore
