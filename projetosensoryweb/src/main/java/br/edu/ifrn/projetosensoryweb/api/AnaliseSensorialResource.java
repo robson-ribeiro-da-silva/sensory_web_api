@@ -19,12 +19,14 @@ import br.edu.ifrn.projetosensoryweb.model.AnaliseSensorial;
 import br.edu.ifrn.projetosensoryweb.model.AvaliacaoHedonica;
 import br.edu.ifrn.projetosensoryweb.model.Avaliador;
 import br.edu.ifrn.projetosensoryweb.model.Escala;
+import br.edu.ifrn.projetosensoryweb.model.Produto;
 import br.edu.ifrn.projetosensoryweb.model.RespostaHedonica;
 import br.edu.ifrn.projetosensoryweb.model.StatusAnalise;
 import br.edu.ifrn.projetosensoryweb.service.AmostraService;
 import br.edu.ifrn.projetosensoryweb.service.AnaliseSensorialService;
 import br.edu.ifrn.projetosensoryweb.service.AvaliacaoHedonicaService;
 import br.edu.ifrn.projetosensoryweb.service.AvaliadorService;
+import br.edu.ifrn.projetosensoryweb.service.ProdutoService;
 import br.edu.ifrn.projetosensoryweb.service.RespostaHedonicaService;
 //import io.swagger.annotations.ApiOperation;
 
@@ -47,6 +49,9 @@ public class AnaliseSensorialResource {
 	@Autowired
 	private AvaliadorService serviceavaliador;
 
+	@Autowired
+	private ProdutoService serviceproduto;
+	
 	//@ApiOperation(value = "Retorna uma lista de Análises")
 	@GetMapping(value = "/findAll", produces="application/json")
 	public ResponseEntity<List<AnaliseSensorial>> findAll() {
@@ -90,14 +95,31 @@ public class AnaliseSensorialResource {
 		 * 
 		 * if(avaliador == null){ return ResponseEntity.notFound().build(); }
 		 */
+		
+		Amostra amostraok = null;
+		
+		int idpro = id.intValue();
+		
+		//System.out.println("aqui em cima "+idpro);
+		List<Produto> produtos = serviceproduto.findByCodigoAnalise(service.findByIdAnalise(id));
+		//System.out.println("aqui em baixo "+idpro);
+		for(Produto p: produtos){
+			for(Amostra a: p.getAmostras()){
+				
+				if(a.getCodigo() == codigoamostra){
+					amostraok = a;
+				}
+			}
+		}
+		//System.out.println("aqui");
 		int total = 0;
-		Amostra amostra = serviceamostra.findByIdAnaliseAndCodAmostra(id, codigoamostra);
+		//Amostra amostra = serviceamostra.findByIdAnaliseAndCodAmostra(id, codigoamostra);
 
-		if (amostra == null) {
+		if (amostraok == null) {
 			return ResponseEntity.notFound().build();
 		}
 
-		List<RespostaHedonica> respostas = amostra.getRespostahedonica();
+		List<RespostaHedonica> respostas = amostraok.getRespostahedonica();
 
 		if (respostas != null) {
 			for (int i = 0; i < respostas.size(); i++) {
@@ -116,7 +138,7 @@ public class AnaliseSensorialResource {
 			return ResponseEntity.notFound().build();
 		}
 		RespostaHedonica respostaHedonica = new RespostaHedonica();
-		respostaHedonica.setAmostra(amostra);
+		respostaHedonica.setAmostra(amostraok);
 		respostaHedonica.setResposta(resposta);
 		respostaHedonica.setAvaliacaohedonica(avaliacao);
 

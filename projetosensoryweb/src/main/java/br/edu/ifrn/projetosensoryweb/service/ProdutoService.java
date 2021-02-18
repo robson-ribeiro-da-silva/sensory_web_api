@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import br.edu.ifrn.projetosensoryweb.model.AnaliseSensorial;
 import br.edu.ifrn.projetosensoryweb.model.Produto;
 import br.edu.ifrn.projetosensoryweb.repository.ProdutoRepository;
 
@@ -30,4 +31,7 @@ public class ProdutoService {
 		repository.deleteById(id);
 	}
 
+	public List<Produto> findByCodigoAnalise(AnaliseSensorial analise){
+		return repository.findByCodigoAnalise(analise);
+	}
 }
